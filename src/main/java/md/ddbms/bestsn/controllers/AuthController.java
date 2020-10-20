@@ -8,6 +8,7 @@ import md.ddbms.bestsn.exceptions.LoginAlreadyExistsException;
 import md.ddbms.bestsn.models.responses.JwtResponse;
 import md.ddbms.bestsn.models.responses.Response;
 import md.ddbms.bestsn.services.IUserService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +22,7 @@ import javax.validation.Valid;
 @CrossOrigin("*")
 @RestController
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthController extends XmlJsonController {
     private final IUserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -44,7 +45,7 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-        
+
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 }

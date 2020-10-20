@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Scanner;
@@ -16,7 +15,7 @@ import java.util.Scanner;
 @Configuration
 @EnableMongoRepositories(basePackages = "md.ddbms.bestsn.repositories")
 public class MongoConfig extends AbstractMongoClientConfiguration {
-    private int port = 50001;
+    private int port = 50002;
 
     @Override
     protected String getDatabaseName() {
@@ -34,14 +33,15 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
         return MongoClients.create(mongoClientSettings);
     }
 
-//    @PostConstruct
+    //    @PostConstruct
+    @SuppressWarnings("unused")
     public void requestPort() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter port to connect: ");
         port = scanner.nextInt();
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public Collection getMappingBasePackages() {
         return Collections.singleton("md.ddbms.bestsn");
