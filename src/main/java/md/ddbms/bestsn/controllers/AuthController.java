@@ -2,7 +2,7 @@ package md.ddbms.bestsn.controllers;
 
 import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
-import md.ddbms.bestsn.config.JwtUtils;
+import md.ddbms.bestsn.config.jwt.JwtUtils;
 import md.ddbms.bestsn.dtos.UserDTO;
 import md.ddbms.bestsn.exceptions.LoginAlreadyExistsException;
 import md.ddbms.bestsn.models.responses.JwtResponse;
@@ -39,13 +39,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestParam @NotNull String login,
                                        @RequestParam @NotNull String password) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(login, password)
-        );
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(login, password));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-
+        
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 }

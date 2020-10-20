@@ -7,7 +7,6 @@ import md.ddbms.bestsn.exceptions.UserNotFoundException;
 import md.ddbms.bestsn.models.User;
 import md.ddbms.bestsn.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,10 +31,12 @@ public class UserService implements IUserService {
 
     @Override
     public User create(UserDTO userDTO) throws LoginAlreadyExistsException {
-        userRepository.findUserByLogin(userDTO.getLogin())
-                .orElseThrow(() -> new LoginAlreadyExistsException(
-                        "Login " + userDTO.getLogin() + " already exists"
-                ));
+
+        Optional<User> user = userRepository.findUserByLogin(userDTO.getLogin());
+        if (user.isPresent()) {
+            throw new LoginAlreadyExistsException("Login " + userDTO.getLogin() + " already exists");
+        }
+
         User createdUser = userDTO.toUser();
         userRepository.save(createdUser);
 

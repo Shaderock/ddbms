@@ -1,4 +1,4 @@
-package md.ddbms.bestsn.config;
+package md.ddbms.bestsn.config.jwt;
 
 import io.jsonwebtoken.*;
 import md.ddbms.bestsn.models.User;
@@ -14,11 +14,10 @@ import java.util.Date;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${jwt.secret}")
-    private String jwtSecret;
+    private final String jwtSecret = "coolJwtSecretKey";
 
-    @Value("${jwt.expirationTime}")
-    private int jwtExpirationMs;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final int jwtExpirationMs = 86400000;
 
     public String generateJwtToken(Authentication authentication) {
 

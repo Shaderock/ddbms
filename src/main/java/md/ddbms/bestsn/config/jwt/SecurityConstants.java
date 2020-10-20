@@ -1,4 +1,4 @@
-package md.ddbms.bestsn.config;
+package md.ddbms.bestsn.config.jwt;
 
 import java.util.concurrent.TimeUnit;
 
