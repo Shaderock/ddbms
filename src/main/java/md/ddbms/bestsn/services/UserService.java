@@ -18,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService implements IUserService {
     private final UserRepository userRepository;
+    private final ISequenceGeneratorService sequenceGeneratorService;
 
     @Override
     @Transactional
@@ -36,8 +37,8 @@ public class UserService implements IUserService {
         if (user.isPresent()) {
             throw new LoginAlreadyExistsException("Login " + userDTO.getLogin() + " already exists");
         }
-
         User createdUser = userDTO.toUser();
+        createdUser.setId(sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME));
         userRepository.save(createdUser);
 
         return createdUser;

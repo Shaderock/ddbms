@@ -17,8 +17,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
+    @Transient
+    public static final String SEQUENCE_NAME = "user_sequence";
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @NotNull
