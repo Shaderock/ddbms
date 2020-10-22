@@ -2,7 +2,7 @@ package md.ddbms.bestsn.controllers;
 
 import lombok.RequiredArgsConstructor;
 import md.ddbms.bestsn.models.User;
-import md.ddbms.bestsn.models.responses.ProfileResponse;
+import md.ddbms.bestsn.models.responses.UserResponse;
 import md.ddbms.bestsn.services.IUserService;
 import md.ddbms.bestsn.utils.AuthenticationHelper;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +17,8 @@ public class ProfileController extends XmlJsonController {
     private final IUserService userService;
 
     @GetMapping
-    public ResponseEntity<ProfileResponse> getProfile() {
+    public ResponseEntity<UserResponse> getProfile() {
         User user = AuthenticationHelper.getAuthenticatedUser();
-        return ResponseEntity.ok(new ProfileResponse(user.getLogin(), user.getFirstName(), user.getLastName()));
+        return ResponseEntity.ok(new UserResponse(user));
     }
 }

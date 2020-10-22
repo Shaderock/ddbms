@@ -25,7 +25,7 @@ public class UserService implements IUserService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findUserByLogin(login);
+        Optional<User> user = userRepository.findByLogin(login);
         if (!user.isPresent()) {
             throw new UsernameNotFoundException(login);
         }
@@ -35,7 +35,7 @@ public class UserService implements IUserService {
     @Override
     public User create(UserDTO userDTO) throws LoginAlreadyExistsException {
 
-        Optional<User> user = userRepository.findUserByLogin(userDTO.getLogin());
+        Optional<User> user = userRepository.findByLogin(userDTO.getLogin());
         if (user.isPresent()) {
             throw new LoginAlreadyExistsException("Login " + userDTO.getLogin() + " already exists");
         }
@@ -53,25 +53,28 @@ public class UserService implements IUserService {
 
     @Override
     public User getById(int id) throws UserNotFoundException {
-        return userRepository.findUserById(id)
+        return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with id = " + id + " not found"));
     }
 
     @Override
     public User getByLogin(String login) throws UserNotFoundException {
-        return userRepository.findUserByLogin(login)
+        return userRepository.findByLogin(login)
                 .orElseThrow(() -> new UserNotFoundException("User with login = '" + login + "' not found"));
     }
 
     @Override
+    public List<User> getAllFriends(User user) {
+        return userRepository.findByIdIn(user.getFriendIds());
+    }
+
     public void addFriend(User user, int friendId) throws UserNotFoundException, FriendAlreadyAddedException {
         getById(friendId);
 
         if (!user.getFriendIds().contains(friendId)) {
             user.getFriendIds().add(friendId);
             userRepository.save(user);
-        }
-        else {
+        } else {
             throw new FriendAlreadyAddedException("Friend with id = " + friendId + " already is in your friend list");
         }
     }
@@ -81,8 +84,7 @@ public class UserService implements IUserService {
         if (user.getFriendIds().contains(friendId)) {
             user.getFriendIds().remove((Integer) friendId);
             userRepository.save(user);
-        }
-        else {
+        } else {
             throw new FriendDoesNotExistException("Friend with id = " + friendId + " is not found in your friend list");
         }
 
