@@ -50,12 +50,23 @@ public class UserService implements IUserService {
 
     @Override
     public User getById(int id) throws UserNotFoundException {
-        return null;
+        return userRepository.findUserById(id)
+                .orElseThrow(() -> new UserNotFoundException("User with id = " + id + " not found"));
     }
 
     @Override
     public User getByLogin(String login) throws UserNotFoundException {
-        return null;
+        return userRepository.findUserByLogin(login)
+                .orElseThrow(() -> new UserNotFoundException("User with login = '" + login + "' not found"));
+    }
+
+    @Override
+    @Transactional
+    public void addFriend(User user, int friendId) throws UserNotFoundException {
+        User friend = userRepository.findUserById(friendId)
+                .orElseThrow(() -> new UserNotFoundException("User with id = " + friendId + " not found"));
+        user.getFriendList().add(friend);
+        friend.getRequestedFriendList().add(user);
     }
 
     @Override

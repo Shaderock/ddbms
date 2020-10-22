@@ -17,5 +17,7 @@ public interface IUserService extends UserDetailsService {
 
     User getByLogin(String login) throws UserNotFoundException;
 
+    void addFriend(User user, int friendId) throws UserNotFoundException;
+
     List<User> getAll();
 }
