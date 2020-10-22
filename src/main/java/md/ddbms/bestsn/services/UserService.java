@@ -2,6 +2,8 @@ package md.ddbms.bestsn.services;
 
 import lombok.RequiredArgsConstructor;
 import md.ddbms.bestsn.dtos.UserDTO;
+import md.ddbms.bestsn.exceptions.FriendAlreadyAddedException;
+import md.ddbms.bestsn.exceptions.FriendDoesNotExistException;
 import md.ddbms.bestsn.exceptions.LoginAlreadyExistsException;
 import md.ddbms.bestsn.exceptions.UserNotFoundException;
 import md.ddbms.bestsn.models.User;
@@ -62,21 +64,33 @@ public class UserService implements IUserService {
     }
 
     @Override
-    @Transactional
-    public void addFriend(User user, int friendId) throws UserNotFoundException {
-        userRepository.findUserById(friendId)
-                .orElseThrow(() -> new UserNotFoundException("User with id = " + friendId + " not found"));
-        
-        if (user.getFriendIds().contains(friendId)) {
+    public void addFriend(User user, int friendId) throws UserNotFoundException, FriendAlreadyAddedException {
+        getById(friendId);
+
+        if (!user.getFriendIds().contains(friendId)) {
             user.getFriendIds().add(friendId);
             userRepository.save(user);
         }
+        else {
+            throw new FriendAlreadyAddedException("Friend with id = " + friendId + " already is in your friend list");
+        }
+    }
+
+    @Override
+    public void removeFriend(User user, int friendId) throws UserNotFoundException, FriendDoesNotExistException {
+        if (user.getFriendIds().contains(friendId)) {
+            user.getFriendIds().remove((Integer) friendId);
+            userRepository.save(user);
+        }
+        else {
+            throw new FriendDoesNotExistException("Friend with id = " + friendId + " is not found in your friend list");
+        }
+
+        getById(friendId);
     }
 
     @Override
     public List<User> getAll() {
         return null;
     }
-
-
 }
