@@ -36,16 +36,8 @@ public class User implements UserDetails {
     @NotNull
     private String password;
 
-    // friendList - List of people that this user consider as his friends
-    @JoinTable(name = "Friends", joinColumns = {
-            @JoinColumn(name = "Requested_UserId", referencedColumnName = "UserId")}, inverseJoinColumns = {
-            @JoinColumn(name = "Addressed_UserId", referencedColumnName = "UserId")})
-    @ManyToMany
-    private List<User> friendList = new ArrayList<>();
-
-    //requestedFriendList - List of people that requested friendship with this user
-    @ManyToMany(mappedBy = "friendList")
-    private List<User> requestedFriendList = new ArrayList<>();
+    @NotNull
+    private List<Integer> friendIds = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

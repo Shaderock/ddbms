@@ -64,10 +64,13 @@ public class UserService implements IUserService {
     @Override
     @Transactional
     public void addFriend(User user, int friendId) throws UserNotFoundException {
-        User friend = userRepository.findUserById(friendId)
+        userRepository.findUserById(friendId)
                 .orElseThrow(() -> new UserNotFoundException("User with id = " + friendId + " not found"));
-        user.getFriendList().add(friend);
-        friend.getRequestedFriendList().add(user);
+        
+        if (user.getFriendIds().contains(friendId)) {
+            user.getFriendIds().add(friendId);
+            userRepository.save(user);
+        }
     }
 
     @Override
