@@ -13,7 +13,7 @@ import java.util.List;
 public interface IUserService extends UserDetailsService {
     User create(UserDTO userDTO) throws LoginAlreadyExistsException;
 
-    User update(UserDTO userDTO) throws UserNotFoundException;
+    User update(User user, UserDTO userDTO);
 
     User getById(int id) throws UserNotFoundException;
 

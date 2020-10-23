@@ -34,7 +34,6 @@ public class UserService implements IUserService {
 
     @Override
     public User create(UserDTO userDTO) throws LoginAlreadyExistsException {
-
         Optional<User> user = userRepository.findByLogin(userDTO.getLogin());
         if (user.isPresent()) {
             throw new LoginAlreadyExistsException("Login " + userDTO.getLogin() + " already exists");
@@ -47,8 +46,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User update(UserDTO userDTO) throws UserNotFoundException {
-        return null;
+    @Transactional
+    public User update(User user, UserDTO userDTO) {
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setPassword(userDTO.getPassword());
+        userRepository.save(user);
+        return user;
     }
 
     @Override
