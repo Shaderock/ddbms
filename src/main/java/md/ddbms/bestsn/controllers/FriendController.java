@@ -13,8 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/friends")
 @RequiredArgsConstructor
+@RequestMapping(value = "/friends")
 public class FriendController extends XmlJsonController {
     private final IUserService userService;
 
@@ -40,3 +40,4 @@ public class FriendController extends XmlJsonController {
         return ResponseEntity.ok(new Response<>("Friend has been removed from your friends list"));
     }
 }
+

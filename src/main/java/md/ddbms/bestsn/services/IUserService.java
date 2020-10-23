@@ -25,5 +25,7 @@ public interface IUserService extends UserDetailsService {
 
     void removeFriend(User user, int friendId) throws UserNotFoundException, FriendDoesNotExistException;
 
+    List<User> search(String searchQuery);
+
     List<User> getAll();
 }

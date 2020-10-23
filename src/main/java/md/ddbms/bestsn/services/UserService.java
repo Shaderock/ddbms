@@ -13,8 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -93,6 +92,17 @@ public class UserService implements IUserService {
         }
 
         getById(friendId);
+    }
+
+    @Override
+    public List<User> search(String searchQuery) {
+        Set<User> users = new HashSet<>();
+        String[] subQueries = searchQuery.split(" ");
+        for (String subQuery : subQueries) {
+            users.addAll(userRepository
+                    .findByLoginContainingOrFirstNameContainingOrLastNameContaining(subQuery, subQuery, subQuery));
+        }
+        return new ArrayList<>(users);
     }
 
     @Override
