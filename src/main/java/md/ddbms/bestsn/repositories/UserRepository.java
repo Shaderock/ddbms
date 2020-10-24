@@ -14,7 +14,7 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     List<User> findByIdIn(Collection<Integer> id);
 
-    List<User> findByLoginContainingOrFirstNameContainingOrLastNameContaining(String loginQuery,
-                                                                              String firstNameQuery,
-                                                                              String lastNameQuery);
+    List<User> findByLoginContainingOrFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String loginQuery,
+                                                                                                  String firstNameQuery,
+                                                                                                  String lastNameQuery);
 }

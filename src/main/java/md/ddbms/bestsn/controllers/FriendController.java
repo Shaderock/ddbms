@@ -39,5 +39,11 @@ public class FriendController extends XmlJsonController {
         userService.removeFriend(user, friendId);
         return ResponseEntity.ok(new Response<>("Friend has been removed from your friends list"));
     }
+
+    @GetMapping(value = "/search")
+    public ResponseEntity<?> searchFriend(@RequestParam String searchQuery) {
+        User user = AuthenticationHelper.getAuthenticatedUser();
+        return ResponseEntity.ok(new UsersResponse(userService.searchFriend(user, searchQuery)));
+    }
 }
 

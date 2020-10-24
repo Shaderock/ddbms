@@ -67,6 +67,17 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<User> search(String searchQuery) {
+        Set<User> users = new HashSet<>();
+        String[] subQueries = searchQuery.split(" ");
+        for (String subQuery : subQueries) {
+            users.addAll(userRepository
+                    .findByLoginContainingOrFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(subQuery, subQuery, subQuery));
+        }
+        return new ArrayList<>(users);
+    }
+
+    @Override
     public List<User> getAllFriends(User user) {
         return userRepository.findByIdIn(user.getFriendIds());
     }
@@ -95,14 +106,21 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> search(String searchQuery) {
-        Set<User> users = new HashSet<>();
+    public List<User> searchFriend(User user, String searchQuery) {
+        Set<User> notFriendUsers = new HashSet<>();
         String[] subQueries = searchQuery.split(" ");
         for (String subQuery : subQueries) {
-            users.addAll(userRepository
-                    .findByLoginContainingOrFirstNameContainingOrLastNameContaining(subQuery, subQuery, subQuery));
+            notFriendUsers.addAll(userRepository
+                    .findByLoginContainingOrFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(subQuery, subQuery, subQuery));
         }
-        return new ArrayList<>(users);
+        List<User> friendUsers = new ArrayList<>(notFriendUsers);
+        for (int i = 0; i < friendUsers.size(); ++i) {
+            if (!user.getFriendIds().contains(friendUsers.get(i).getId())) {
+                friendUsers.remove(i);
+                --i;
+            }
+        }
+        return friendUsers;
     }
 
     @Override
