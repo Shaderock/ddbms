@@ -19,13 +19,13 @@ public class FriendController extends XmlJsonController {
     private final IUserService userService;
 
     @GetMapping
-    public ResponseEntity<?> getAllFriends() {
+    public ResponseEntity<UsersResponse> getAllFriends() {
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UsersResponse(userService.getAllFriends(user)));
     }
 
     @PostMapping(value = "/add")
-    public ResponseEntity<?> addFriend(@RequestParam(name = "userId") int friendId)
+    public ResponseEntity<Response<String>> addFriend(@RequestParam(name = "userId") int friendId)
             throws UserNotFoundException, FriendAlreadyAddedException {
         User user = AuthenticationHelper.getAuthenticatedUser();
         userService.addFriend(user, friendId);
@@ -33,7 +33,7 @@ public class FriendController extends XmlJsonController {
     }
 
     @DeleteMapping(value = "/remove")
-    public ResponseEntity<?> removeFriend(@RequestParam(name = "userId") int friendId)
+    public ResponseEntity<Response<String>> removeFriend(@RequestParam(name = "userId") int friendId)
             throws UserNotFoundException, FriendDoesNotExistException {
         User user = AuthenticationHelper.getAuthenticatedUser();
         userService.removeFriend(user, friendId);
@@ -41,7 +41,7 @@ public class FriendController extends XmlJsonController {
     }
 
     @GetMapping(value = "/search")
-    public ResponseEntity<?> searchFriend(@RequestParam String searchQuery) {
+    public ResponseEntity<UsersResponse> searchFriend(@RequestParam String searchQuery) {
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UsersResponse(userService.searchFriend(user, searchQuery)));
     }

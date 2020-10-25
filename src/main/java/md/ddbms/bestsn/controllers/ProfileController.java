@@ -2,6 +2,7 @@ package md.ddbms.bestsn.controllers;
 
 import lombok.RequiredArgsConstructor;
 import md.ddbms.bestsn.dtos.UserDTO;
+import md.ddbms.bestsn.exceptions.UserNotFoundException;
 import md.ddbms.bestsn.models.User;
 import md.ddbms.bestsn.models.responses.UserResponse;
 import md.ddbms.bestsn.services.interfaces.IUserService;
@@ -21,6 +22,13 @@ public class ProfileController extends XmlJsonController {
     public ResponseEntity<UserResponse> getProfile() {
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UserResponse(user));
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<UserResponse> getProfileById(@PathVariable int id)
+            throws UserNotFoundException {
+        AuthenticationHelper.getAuthenticatedUser();
+        return ResponseEntity.ok(new UserResponse(userService.getById(id)));
     }
 
     @PutMapping

@@ -28,7 +28,7 @@ public class AuthController extends XmlJsonController {
     private final JwtUtils jwtUtils;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody @Valid UserDTO userDTO)
+    public ResponseEntity<Response<String>> registerUser(@RequestBody @Valid UserDTO userDTO)
             throws LoginAlreadyExistsException {
         userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         userService.create(userDTO);
@@ -37,7 +37,7 @@ public class AuthController extends XmlJsonController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestParam @NotNull String login,
+    public ResponseEntity<JwtResponse> loginUser(@RequestParam @NotNull String login,
                                        @RequestParam @NotNull String password) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(login, password));

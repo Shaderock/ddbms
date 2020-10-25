@@ -17,7 +17,7 @@ public class PeopleController extends XmlJsonController {
     private final IUserService userService;
 
     @GetMapping(value = "/search")
-    public ResponseEntity<?> searchPeople(@RequestParam String searchQuery) {
+    public ResponseEntity<UsersResponse> searchPeople(@RequestParam String searchQuery) {
         AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UsersResponse(userService.search(searchQuery)));
     }

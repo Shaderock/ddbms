@@ -23,7 +23,7 @@ public class MessageController extends XmlJsonController {
     private final IMessageService messageService;
 
     @PostMapping(value = "/send")
-    public ResponseEntity<?> sendMessage(@RequestParam(name = "to") int receiverId,
+    public ResponseEntity<Response<String>> sendMessage(@RequestParam(name = "to") int receiverId,
                                          @RequestBody @Valid MessageDTO messageDTO)
             throws UserNotFoundException, MultiChatsException, InconsistentDBException {
         User user = AuthenticationHelper.getAuthenticatedUser();
@@ -32,7 +32,7 @@ public class MessageController extends XmlJsonController {
     }
 
     @GetMapping(value = "/history")
-    public ResponseEntity<?> getMessageHistory(@RequestParam int withUserId)
+    public ResponseEntity<MessageHistoryResponse> getMessageHistory(@RequestParam int withUserId)
             throws UserNotFoundException, MultiChatsException, InconsistentDBException {
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(
@@ -40,7 +40,7 @@ public class MessageController extends XmlJsonController {
     }
 
     @GetMapping(value = "/chatlist")
-    public ResponseEntity<?> getChatList() {
+    public ResponseEntity<ChatListResponse> getChatList() {
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new ChatListResponse(messageService.getChatList(user), user));
     }
