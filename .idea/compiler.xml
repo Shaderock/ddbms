@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="data_warehouse" />
+        <module name="proxy" />
+        <module name="rmi" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="data_warehouse" target="1.8" />
+      <module name="distributed_system" target="1.8" />
+      <module name="proxy" target="1.8" />
+      <module name="rmi" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="data_warehouse" options="-parameters" />
+      <module name="proxy" options="-parameters" />
+      <module name="rmi" options="-parameters" />
+    </option>
+  </component>
+</project>
