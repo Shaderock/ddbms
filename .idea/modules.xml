@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/data_warehouse/data_warehouse.iml" filepath="$PROJECT_DIR$/data_warehouse/data_warehouse.iml" />
-      <module fileurl="file://$PROJECT_DIR$/distributed_system.iml" filepath="$PROJECT_DIR$/distributed_system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ddbms.iml" filepath="$PROJECT_DIR$/ddbms.iml" />
       <module fileurl="file://$PROJECT_DIR$/proxy/proxy.iml" filepath="$PROJECT_DIR$/proxy/proxy.iml" />
       <module fileurl="file://$PROJECT_DIR$/rmi/rmi.iml" filepath="$PROJECT_DIR$/rmi/rmi.iml" />
     </modules>

@@ -14,6 +14,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="data_warehouse" target="1.8" />
+      <module name="ddbms" target="1.8" />
       <module name="distributed_system" target="1.8" />
       <module name="proxy" target="1.8" />
       <module name="rmi" target="1.8" />
