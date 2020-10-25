@@ -2,7 +2,7 @@ package md.ddbms.bestsn.controllers;
 
 import lombok.RequiredArgsConstructor;
 import md.ddbms.bestsn.models.responses.UsersResponse;
-import md.ddbms.bestsn.services.IUserService;
+import md.ddbms.bestsn.services.interfaces.IUserService;
 import md.ddbms.bestsn.utils.AuthenticationHelper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

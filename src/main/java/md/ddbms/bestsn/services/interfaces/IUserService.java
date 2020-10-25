@@ -1,4 +1,4 @@
-package md.ddbms.bestsn.services;
+package md.ddbms.bestsn.services.interfaces;
 
 import md.ddbms.bestsn.dtos.UserDTO;
 import md.ddbms.bestsn.exceptions.FriendAlreadyAddedException;

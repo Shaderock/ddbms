@@ -1,4 +1,4 @@
-package md.ddbms.bestsn.services;
+package md.ddbms.bestsn.services.implementations;
 
 import lombok.RequiredArgsConstructor;
 import md.ddbms.bestsn.dtos.UserDTO;
@@ -8,6 +8,8 @@ import md.ddbms.bestsn.exceptions.LoginAlreadyExistsException;
 import md.ddbms.bestsn.exceptions.UserNotFoundException;
 import md.ddbms.bestsn.models.User;
 import md.ddbms.bestsn.repositories.UserRepository;
+import md.ddbms.bestsn.services.interfaces.ISequenceGeneratorService;
+import md.ddbms.bestsn.services.interfaces.IUserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

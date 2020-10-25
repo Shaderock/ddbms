@@ -1,7 +1,7 @@
 package md.ddbms.bestsn.config.jwt;
 
 import lombok.RequiredArgsConstructor;
-import md.ddbms.bestsn.services.IUserService;
+import md.ddbms.bestsn.services.interfaces.IUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

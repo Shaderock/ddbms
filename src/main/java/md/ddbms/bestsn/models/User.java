@@ -14,17 +14,20 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
     @Transient
-    public static final String SEQUENCE_NAME = "user_sequence";
+    public static final String SEQUENCE_NAME = "userSequence";
 
     @Id
+    @EqualsAndHashCode.Include
     private int id;
 
     @NotNull
     @Column(unique = true)
+    @EqualsAndHashCode.Include
     private String login;
 
     @NotNull

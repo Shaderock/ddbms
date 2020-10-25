@@ -1,14 +1,21 @@
 package md.ddbms.bestsn.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Entity;
 
 @Data
-@Document(collection = "database_sequences")
+@Entity
+@AllArgsConstructor
 public class DatabaseSequence {
     @Id
     private String id;
 
-    private int seq;
+    private int sequence;
+
+    public void IncrementSequence() {
+        sequence++;
+    }
 }

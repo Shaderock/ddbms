@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import md.ddbms.bestsn.dtos.UserDTO;
 import md.ddbms.bestsn.models.User;
 import md.ddbms.bestsn.models.responses.UserResponse;
-import md.ddbms.bestsn.services.IUserService;
+import md.ddbms.bestsn.services.interfaces.IUserService;
 import md.ddbms.bestsn.utils.AuthenticationHelper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

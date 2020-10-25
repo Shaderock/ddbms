@@ -1,7 +1,7 @@
 package md.ddbms.bestsn.config.jwt;
 
 import lombok.RequiredArgsConstructor;
-import md.ddbms.bestsn.services.IUserService;
+import md.ddbms.bestsn.services.interfaces.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

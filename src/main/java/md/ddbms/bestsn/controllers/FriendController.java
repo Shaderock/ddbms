@@ -7,7 +7,7 @@ import md.ddbms.bestsn.exceptions.UserNotFoundException;
 import md.ddbms.bestsn.models.User;
 import md.ddbms.bestsn.models.responses.Response;
 import md.ddbms.bestsn.models.responses.UsersResponse;
-import md.ddbms.bestsn.services.IUserService;
+import md.ddbms.bestsn.services.interfaces.IUserService;
 import md.ddbms.bestsn.utils.AuthenticationHelper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
