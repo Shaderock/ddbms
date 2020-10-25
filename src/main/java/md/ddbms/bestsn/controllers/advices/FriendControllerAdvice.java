@@ -4,6 +4,7 @@ import md.ddbms.bestsn.controllers.FriendController;
 import md.ddbms.bestsn.exceptions.FriendAlreadyAddedException;
 import md.ddbms.bestsn.exceptions.FriendDoesNotExistException;
 import md.ddbms.bestsn.exceptions.UserNotFoundException;
+import md.ddbms.bestsn.models.responses.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,7 +16,7 @@ public class FriendControllerAdvice {
             FriendAlreadyAddedException.class,
             UserNotFoundException.class,
             FriendDoesNotExistException.class})
-    public ResponseEntity<String> handleFriendActionException(Exception e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    public ResponseEntity<ErrorResponse> handleFriendActionException(Exception e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(e.getMessage()));
     }
 }

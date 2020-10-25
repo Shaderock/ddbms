@@ -3,6 +3,7 @@ package md.ddbms.bestsn.controllers;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.bestsn.dtos.MessageDTO;
 import md.ddbms.bestsn.exceptions.InconsistentDBException;
+import md.ddbms.bestsn.exceptions.MessageHistoryNotFoundException;
 import md.ddbms.bestsn.exceptions.MultiChatsException;
 import md.ddbms.bestsn.exceptions.UserNotFoundException;
 import md.ddbms.bestsn.models.User;
@@ -33,7 +34,8 @@ public class MessageController extends XmlJsonController {
 
     @GetMapping(value = "/history")
     public ResponseEntity<MessageHistoryResponse> getMessageHistory(@RequestParam int withUserId)
-            throws UserNotFoundException, MultiChatsException, InconsistentDBException {
+            throws UserNotFoundException, MultiChatsException,
+            InconsistentDBException, MessageHistoryNotFoundException {
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(
                 new MessageHistoryResponse(messageService.getMessageHistory(user, withUserId), withUserId));

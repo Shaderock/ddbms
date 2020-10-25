@@ -24,7 +24,6 @@ public class MessageHistory {
     private int id;
 
     @EqualsAndHashCode.Include
-    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Integer> usersId = new HashSet<>();
 
     private List<Message> messages = new ArrayList<>();

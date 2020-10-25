@@ -3,6 +3,7 @@ package md.ddbms.bestsn.services.implementations;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.bestsn.dtos.MessageDTO;
 import md.ddbms.bestsn.exceptions.InconsistentDBException;
+import md.ddbms.bestsn.exceptions.MessageHistoryNotFoundException;
 import md.ddbms.bestsn.exceptions.MultiChatsException;
 import md.ddbms.bestsn.exceptions.UserNotFoundException;
 import md.ddbms.bestsn.models.MessageHistory;
@@ -27,15 +28,24 @@ public class MessageService implements IMessageService {
     @Transactional
     public void sendMessage(User sender, int receiverId, MessageDTO messageDTO)
             throws UserNotFoundException, MultiChatsException, InconsistentDBException {
-        MessageHistory messageHistory = getMessageHistory(sender, receiverId);
 
-        messageHistory.addMessage(messageDTO.toMessage(messageHistory.getUsersId().toArray()[0].equals(sender)));
+        MessageHistory messageHistory;
+        try {
+            messageHistory = getMessageHistory(sender, receiverId);
+        } catch (MessageHistoryNotFoundException e) {
+            User receiver = userService.getById(receiverId);
+            messageHistory = new MessageHistory(
+                    sequenceGeneratorService.generateSequence(MessageHistory.SEQUENCE_NAME),
+                    sender, receiver);
+        }
+
+        messageHistory.addMessage(messageDTO.toMessage(!messageHistory.getUsersId().toArray()[0].equals(receiverId)));
         messageHistoryRepository.save(messageHistory);
     }
 
     @Override
     public MessageHistory getMessageHistory(User user, int withUserId)
-            throws MultiChatsException, InconsistentDBException, UserNotFoundException {
+            throws MultiChatsException, InconsistentDBException, UserNotFoundException, MessageHistoryNotFoundException {
         User withUser = userService.getById(withUserId);
         List<MessageHistory> messageHistoryUserList = messageHistoryRepository
                 .findByUsersId(user.getId());
@@ -45,23 +55,20 @@ public class MessageService implements IMessageService {
 
         messageHistoryUserList.retainAll(messageHistoryWithUserList);
 
-        MessageHistory messageHistory;
-
         if (messageHistoryUserList.size() == 0) {
-            messageHistory = new MessageHistory(sequenceGeneratorService.generateSequence(MessageHistory.SEQUENCE_NAME),
-                    user, withUser);
-        } else if (messageHistoryUserList.size() == 1) {
-            messageHistory = messageHistoryRepository
-                    .findById(messageHistoryUserList.get(0).getId())
-                    .orElseThrow(() ->
-                            new InconsistentDBException("DB has changed during transaction " +
-                                    "(not found MessageHistory that was present)"));
-        } else {
+            throw new MessageHistoryNotFoundException("Message history with user with id = " + withUserId +
+                    " not found");
+        }
+        if (messageHistoryUserList.size() != 1) {
             throw new MultiChatsException("Multiple chats for users with id = [" + user.getId() +
                     ", " + withUserId + "] has found");
         }
 
-        return messageHistory;
+        return messageHistoryRepository
+                .findById(messageHistoryUserList.get(0).getId())
+                .orElseThrow(() ->
+                        new InconsistentDBException("DB has changed during transaction " +
+                                "(not found MessageHistory that was present)"));
     }
 
     @Override
