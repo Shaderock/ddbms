@@ -1,6 +1,7 @@
 package md.ddbms.data_warehouse.repositories;
 
-import md.ddbms.data_warehouse.models.DatabaseSequence;
+
+import models.DatabaseSequence;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

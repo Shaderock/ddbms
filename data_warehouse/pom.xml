@@ -70,6 +70,10 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
         </dependency>
+        <dependency>
+            <groupId>md.ddbms</groupId>
+            <artifactId>rmi</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -31,4 +31,10 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <properties>
+        <maven.test.skip>
+            true
+        </maven.test.skip>
+    </properties>
 </project>
