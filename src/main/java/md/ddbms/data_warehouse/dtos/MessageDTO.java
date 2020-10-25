@@ -1,0 +1,19 @@
+package md.ddbms.data_warehouse.dtos;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import md.ddbms.data_warehouse.models.Message;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class MessageDTO {
+    private String text;
+
+    public Message toMessage(boolean straightDirection) {
+        Message message = new Message(this.text, straightDirection);
+        message.setDateTime();
+        return message;
+    }
+}
