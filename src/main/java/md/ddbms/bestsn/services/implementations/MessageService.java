@@ -27,9 +27,18 @@ public class MessageService implements IMessageService {
     @Transactional
     public void sendMessage(User sender, int receiverId, MessageDTO messageDTO)
             throws UserNotFoundException, MultiChatsException, InconsistentDBException {
-        User receiver = userService.getById(receiverId);
+        MessageHistory messageHistory = getMessageHistory(sender, receiverId);
+
+        messageHistory.addMessage(messageDTO.toMessage(messageHistory.getUsersId().toArray()[0].equals(sender)));
+        messageHistoryRepository.save(messageHistory);
+    }
+
+    @Override
+    public MessageHistory getMessageHistory(User user, int withUserId)
+            throws MultiChatsException, InconsistentDBException, UserNotFoundException {
+        User receiver = userService.getById(withUserId);
         List<MessageHistory> messageHistorySenderList = messageHistoryRepository
-                .findByUsersId(sender.getId());
+                .findByUsersId(user.getId());
 
         List<MessageHistory> messageHistoryReceiverList = messageHistoryRepository
                 .findByUsersId(receiver.getId());
@@ -40,7 +49,7 @@ public class MessageService implements IMessageService {
 
         if (messageHistorySenderList.size() == 0) {
             messageHistory = new MessageHistory(sequenceGeneratorService.generateSequence(MessageHistory.SEQUENCE_NAME),
-                    sender, receiver);
+                    user, receiver);
         } else if (messageHistorySenderList.size() == 1) {
             messageHistory = messageHistoryRepository
                     .findById(messageHistorySenderList.get(0).getId())
@@ -48,11 +57,10 @@ public class MessageService implements IMessageService {
                             new InconsistentDBException("DB has changed during transaction " +
                                     "(not found MessageHistory that was present)"));
         } else {
-            throw new MultiChatsException("Multiple chats for users with id = [" + sender.getId() +
-                    ", " + receiverId + "] has found");
+            throw new MultiChatsException("Multiple chats for users with id = [" + user.getId() +
+                    ", " + withUserId + "] has found");
         }
 
-        messageHistory.addMessage(messageDTO.toMessage(messageHistory.getUsersId().toArray()[0].equals(sender)));
-        messageHistoryRepository.save(messageHistory);
+        return messageHistory;
     }
 }
