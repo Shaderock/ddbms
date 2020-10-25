@@ -7,10 +7,14 @@ import md.ddbms.bestsn.exceptions.UserNotFoundException;
 import md.ddbms.bestsn.models.MessageHistory;
 import md.ddbms.bestsn.models.User;
 
+import java.util.List;
+
 public interface IMessageService {
     void sendMessage(User user, int toUser, MessageDTO messageDTO)
             throws UserNotFoundException, MultiChatsException, InconsistentDBException;
 
     MessageHistory getMessageHistory(User user, int withUserId)
             throws MultiChatsException, InconsistentDBException, UserNotFoundException;
+
+    List<MessageHistory> getChatList(User user);
 }

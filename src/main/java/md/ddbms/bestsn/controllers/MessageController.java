@@ -6,6 +6,7 @@ import md.ddbms.bestsn.exceptions.InconsistentDBException;
 import md.ddbms.bestsn.exceptions.MultiChatsException;
 import md.ddbms.bestsn.exceptions.UserNotFoundException;
 import md.ddbms.bestsn.models.User;
+import md.ddbms.bestsn.models.responses.ChatListResponse;
 import md.ddbms.bestsn.models.responses.MessageHistoryResponse;
 import md.ddbms.bestsn.models.responses.Response;
 import md.ddbms.bestsn.services.interfaces.IMessageService;
@@ -36,5 +37,11 @@ public class MessageController extends XmlJsonController {
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(
                 new MessageHistoryResponse(messageService.getMessageHistory(user, withUserId), withUserId));
+    }
+
+    @GetMapping(value = "/chatlist")
+    public ResponseEntity<?> getChatList() {
+        User user = AuthenticationHelper.getAuthenticatedUser();
+        return ResponseEntity.ok(new ChatListResponse(messageService.getChatList(user), user));
     }
 }

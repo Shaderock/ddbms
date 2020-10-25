@@ -36,23 +36,23 @@ public class MessageService implements IMessageService {
     @Override
     public MessageHistory getMessageHistory(User user, int withUserId)
             throws MultiChatsException, InconsistentDBException, UserNotFoundException {
-        User receiver = userService.getById(withUserId);
-        List<MessageHistory> messageHistorySenderList = messageHistoryRepository
+        User withUser = userService.getById(withUserId);
+        List<MessageHistory> messageHistoryUserList = messageHistoryRepository
                 .findByUsersId(user.getId());
 
-        List<MessageHistory> messageHistoryReceiverList = messageHistoryRepository
-                .findByUsersId(receiver.getId());
+        List<MessageHistory> messageHistoryWithUserList = messageHistoryRepository
+                .findByUsersId(withUser.getId());
 
-        messageHistorySenderList.retainAll(messageHistoryReceiverList);
+        messageHistoryUserList.retainAll(messageHistoryWithUserList);
 
         MessageHistory messageHistory;
 
-        if (messageHistorySenderList.size() == 0) {
+        if (messageHistoryUserList.size() == 0) {
             messageHistory = new MessageHistory(sequenceGeneratorService.generateSequence(MessageHistory.SEQUENCE_NAME),
-                    user, receiver);
-        } else if (messageHistorySenderList.size() == 1) {
+                    user, withUser);
+        } else if (messageHistoryUserList.size() == 1) {
             messageHistory = messageHistoryRepository
-                    .findById(messageHistorySenderList.get(0).getId())
+                    .findById(messageHistoryUserList.get(0).getId())
                     .orElseThrow(() ->
                             new InconsistentDBException("DB has changed during transaction " +
                                     "(not found MessageHistory that was present)"));
@@ -62,5 +62,10 @@ public class MessageService implements IMessageService {
         }
 
         return messageHistory;
+    }
+
+    @Override
+    public List<MessageHistory> getChatList(User user) {
+        return messageHistoryRepository.findByUsersId(user.getId());
     }
 }
