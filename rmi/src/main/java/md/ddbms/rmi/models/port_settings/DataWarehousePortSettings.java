@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class DatawarehousePortSettings {
+public class DataWarehousePortSettings {
     private List<ServicePortSettings> servicePortSettings;
     private int mongoDBPort;
     private int ownSpringPort;

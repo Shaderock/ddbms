@@ -9,6 +9,7 @@ import md.ddbms.proxy.models.responses.ChatListResponse;
 import md.ddbms.proxy.models.responses.MessageHistoryResponse;
 import md.ddbms.proxy.models.responses.Response;
 import md.ddbms.proxy.utils.AuthenticationHelper;
+import md.ddbms.rmi.models.MessageHistory;
 import md.ddbms.rmi.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,8 @@ public class MessageController extends XmlJsonController {
     @PostMapping(value = "/send")
     public ResponseEntity<Response<String>> sendMessage(@RequestParam(name = "to") int receiverId,
                                                         @RequestBody @Valid MessageDTO messageDTO)
-            throws UserNotFoundException, MultiChatsException, InconsistentDBException, NoSuchRMIServiceException {
+            throws UserNotFoundException, MultiChatsException, InconsistentDBException,
+            NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         User user = AuthenticationHelper.getAuthenticatedUser();
         messageService.sendMessage(user, receiverId, messageDTO);
 
@@ -44,7 +46,8 @@ public class MessageController extends XmlJsonController {
     @GetMapping(value = "/history")
     public ResponseEntity<MessageHistoryResponse> getMessageHistory(@RequestParam int withUserId)
             throws UserNotFoundException, MultiChatsException,
-            InconsistentDBException, MessageHistoryNotFoundException, NoSuchRMIServiceException {
+            InconsistentDBException, MessageHistoryNotFoundException,
+            NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         User user = AuthenticationHelper.getAuthenticatedUser();
 
         ArrayList<Integer> usersId = new ArrayList<Integer>() {

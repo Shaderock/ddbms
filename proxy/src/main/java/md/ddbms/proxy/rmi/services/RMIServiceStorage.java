@@ -4,7 +4,7 @@ import md.ddbms.rmi.exceptions.NoSuchServiceException;
 import md.ddbms.rmi.exceptions.ProxyRMIServiceNotFound;
 import md.ddbms.rmi.exceptions.WrongRMIServiceGenericType;
 import md.ddbms.rmi.interfaces.Service;
-import md.ddbms.rmi.models.port_settings.DatawarehousePortSettings;
+import md.ddbms.rmi.models.port_settings.DataWarehousePortSettings;
 import md.ddbms.rmi.models.port_settings.ServerPortSettings;
 import md.ddbms.rmi.models.port_settings.ServicePortSettings;
 import md.ddbms.rmi.utils.ServiceNameToServiceMap;
@@ -25,7 +25,7 @@ public class RMIServiceStorage implements IRMIServiceStorage {
 
     public RMIServiceStorage(ServerPortSettings serverPortSettings)
             throws NoSuchServiceException, WrongRMIServiceGenericType {
-        for (DatawarehousePortSettings datawarehousePortSettings : serverPortSettings.getDatawarehousePortSettings()) {
+        for (DataWarehousePortSettings datawarehousePortSettings : serverPortSettings.getDatawarehousePortSettings()) {
             ProxyRMIService proxyRMIService = new ProxyRMIService();
             for (ServicePortSettings servicePortSetting : datawarehousePortSettings.getServicePortSettings()) {
                 proxyRMIService.createRMIService(
