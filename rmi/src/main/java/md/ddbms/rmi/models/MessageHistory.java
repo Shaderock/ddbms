@@ -1,6 +1,7 @@
 package md.ddbms.rmi.models;
 
 import lombok.*;
+import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.util.Set;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
+@RedisHash
 public class MessageHistory implements Serializable {
     @Transient
     public static final String SEQUENCE_NAME = "messageHistorySequence";
