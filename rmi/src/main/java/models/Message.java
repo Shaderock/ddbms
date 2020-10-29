@@ -4,10 +4,11 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class Message {
+public class Message implements Serializable {
 
     private String text;
 

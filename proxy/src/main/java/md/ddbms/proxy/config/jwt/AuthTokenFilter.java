@@ -1,6 +1,7 @@
 package md.ddbms.proxy.config.jwt;
 
-import lombok.RequiredArgsConstructor;
+import md.ddbms.proxy.services.proxies.UserServiceProxy;
+import md.ddbms.proxy.utils.IRMIServiceHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,12 +19,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Component
 public class AuthTokenFilter extends OncePerRequestFilter {
     private final JwtUtils jwtUtils;
     private final IUserService userService;
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
+
+    public AuthTokenFilter(JwtUtils jwtUtils, IRMIServiceHelper rmiServiceHelper) {
+        this.jwtUtils = jwtUtils;
+        this.userService = new UserServiceProxy(rmiServiceHelper);
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

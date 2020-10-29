@@ -1,10 +1,7 @@
 package md.ddbms.data_warehouse.rmi.services;
 
 import dtos.UserDTO;
-import exceptions.FriendAlreadyAddedException;
-import exceptions.FriendDoesNotExistException;
-import exceptions.LoginAlreadyExistsException;
-import exceptions.UserNotFoundException;
+import exceptions.*;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.data_warehouse.repositories.UserRepository;
 import models.User;
@@ -34,7 +31,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User create(UserDTO userDTO) throws LoginAlreadyExistsException {
+    public User create(UserDTO userDTO) throws LoginAlreadyExistsException, NoSuchRMIServiceException {
         Optional<User> user = userRepository.findByLogin(userDTO.getLogin());
         if (user.isPresent()) {
             throw new LoginAlreadyExistsException("Login " + userDTO.getLogin() + " already exists");

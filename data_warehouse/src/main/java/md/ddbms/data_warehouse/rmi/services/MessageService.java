@@ -1,10 +1,7 @@
 package md.ddbms.data_warehouse.rmi.services;
 
 import dtos.MessageDTO;
-import exceptions.InconsistentDBException;
-import exceptions.MessageHistoryNotFoundException;
-import exceptions.MultiChatsException;
-import exceptions.UserNotFoundException;
+import exceptions.*;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.data_warehouse.repositories.MessageHistoryRepository;
 import models.MessageHistory;
@@ -27,7 +24,7 @@ public class MessageService implements IMessageService {
     @Override
     @Transactional
     public void sendMessage(User sender, int receiverId, MessageDTO messageDTO)
-            throws UserNotFoundException, MultiChatsException, InconsistentDBException {
+            throws UserNotFoundException, MultiChatsException, InconsistentDBException, NoSuchRMIServiceException {
 
         MessageHistory messageHistory;
         try {
@@ -46,7 +43,8 @@ public class MessageService implements IMessageService {
 
 
     public MessageHistory getMessageHistory(User user, int withUserId)
-            throws MultiChatsException, InconsistentDBException, UserNotFoundException, MessageHistoryNotFoundException {
+            throws MultiChatsException, InconsistentDBException, UserNotFoundException,
+            MessageHistoryNotFoundException, NoSuchRMIServiceException {
         User withUser = userService.getById(withUserId);
         List<MessageHistory> messageHistoryUserList = messageHistoryRepository
                 .findByUsersId(user.getId());

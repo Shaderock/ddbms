@@ -1,0 +1,62 @@
+{
+  "proxyPort": 50000,
+  "datawarehousePortSettings": [
+    {
+      "servicePortSettings": [
+        {
+          "serviceName": "IMessageService",
+          "servicePort": 51001
+        },
+        {
+          "serviceName": "ISequenceGeneratorService",
+          "servicePort": 51002
+        },
+        {
+          "serviceName": "IUserService",
+          "servicePort": 51003
+        }
+      ],
+      "mongoDBPort": 50001,
+      "ownSpringPort": 51000,
+      "primary": false
+    },
+    {
+      "servicePortSettings": [
+        {
+          "serviceName": "IMessageService",
+          "servicePort": 52001
+        },
+        {
+          "serviceName": "ISequenceGeneratorService",
+          "servicePort": 52002
+        },
+        {
+          "serviceName": "IUserService",
+          "servicePort": 52003
+        }
+      ],
+      "mongoDBPort": 50002,
+      "ownSpringPort": 52000,
+      "primary": false
+    },
+    {
+      "servicePortSettings": [
+        {
+          "serviceName": "IMessageService",
+          "servicePort": 53001
+        },
+        {
+          "serviceName": "ISequenceGeneratorService",
+          "servicePort": 53002
+        },
+        {
+          "serviceName": "IUserService",
+          "servicePort": 53003
+        }
+      ],
+      "mongoDBPort": 50003,
+      "ownSpringPort": 53000,
+      "primary": true
+    }
+  ]
+}

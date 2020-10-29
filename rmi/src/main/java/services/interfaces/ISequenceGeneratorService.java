@@ -1,5 +1,7 @@
 package services.interfaces;
 
-public interface ISequenceGeneratorService {
-    int generateSequence(String sequenceName);
+import exceptions.NoSuchRMIServiceException;
+
+public interface ISequenceGeneratorService extends Service {
+    int generateSequence(String sequenceName) throws NoSuchRMIServiceException;
 }

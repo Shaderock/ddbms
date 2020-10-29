@@ -1,21 +1,18 @@
 package services.interfaces;
 
 import dtos.MessageDTO;
-import exceptions.InconsistentDBException;
-import exceptions.MessageHistoryNotFoundException;
-import exceptions.MultiChatsException;
-import exceptions.UserNotFoundException;
+import exceptions.*;
 import models.MessageHistory;
 import models.User;
 
 import java.util.List;
 
-public interface IMessageService {
+public interface IMessageService extends Service {
     void sendMessage(User user, int toUser, MessageDTO messageDTO)
-            throws UserNotFoundException, MultiChatsException, InconsistentDBException;
+            throws UserNotFoundException, MultiChatsException, InconsistentDBException, NoSuchRMIServiceException;
 
     MessageHistory getMessageHistory(User user, int withUserId)
-            throws MultiChatsException, InconsistentDBException, UserNotFoundException, MessageHistoryNotFoundException;
+            throws MultiChatsException, InconsistentDBException, UserNotFoundException, MessageHistoryNotFoundException, NoSuchRMIServiceException;
 
-    List<MessageHistory> getChatList(User user);
+    List<MessageHistory> getChatList(User user) throws NoSuchRMIServiceException;
 }

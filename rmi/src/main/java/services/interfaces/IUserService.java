@@ -2,33 +2,30 @@ package services.interfaces;
 
 
 import dtos.UserDTO;
-import exceptions.FriendAlreadyAddedException;
-import exceptions.FriendDoesNotExistException;
-import exceptions.LoginAlreadyExistsException;
-import exceptions.UserNotFoundException;
+import exceptions.*;
 import models.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface IUserService extends UserDetailsService {
-    User create(UserDTO userDTO) throws LoginAlreadyExistsException;
+public interface IUserService extends UserDetailsService, Service {
+    User create(UserDTO userDTO) throws LoginAlreadyExistsException, NoSuchRMIServiceException;
 
-    User update(User user, UserDTO userDTO);
+    User update(User user, UserDTO userDTO) throws NoSuchRMIServiceException;
 
-    User getById(int id) throws UserNotFoundException;
+    User getById(int id) throws UserNotFoundException, NoSuchRMIServiceException;
 
-    User getByLogin(String login) throws UserNotFoundException;
+    User getByLogin(String login) throws UserNotFoundException, NoSuchRMIServiceException;
 
-    List<User> search(String searchQuery);
+    List<User> search(String searchQuery) throws NoSuchRMIServiceException;
 
-    List<User> getAllFriends(User user);
+    List<User> getAllFriends(User user) throws NoSuchRMIServiceException;
 
-    void addFriend(User user, int friendId) throws UserNotFoundException, FriendAlreadyAddedException;
+    void addFriend(User user, int friendId) throws UserNotFoundException, FriendAlreadyAddedException, NoSuchRMIServiceException;
 
-    void removeFriend(User user, int friendId) throws UserNotFoundException, FriendDoesNotExistException;
+    void removeFriend(User user, int friendId) throws UserNotFoundException, FriendDoesNotExistException, NoSuchRMIServiceException;
 
-    List<User> searchFriend(User user, String searchQuery);
+    List<User> searchFriend(User user, String searchQuery) throws NoSuchRMIServiceException;
 
-    List<User> getAll();
+    List<User> getAll() throws NoSuchRMIServiceException;
 }

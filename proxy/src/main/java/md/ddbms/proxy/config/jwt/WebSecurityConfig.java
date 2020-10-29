@@ -1,6 +1,7 @@
 package md.ddbms.proxy.config.jwt;
 
-import lombok.RequiredArgsConstructor;
+import md.ddbms.proxy.services.proxies.UserServiceProxy;
+import md.ddbms.proxy.utils.IRMIServiceHelper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import services.interfaces.IUserService;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
         // securedEnabled = true,
@@ -24,6 +25,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final IUserService userService;
     private final AuthEntryPointJwt unauthorizedHandler;
     private final AuthTokenFilter authTokenFilter;
+
+    public WebSecurityConfig(IRMIServiceHelper rmiServiceHelper, AuthEntryPointJwt unauthorizedHandler, AuthTokenFilter authTokenFilter) {
+        this.userService = new UserServiceProxy(rmiServiceHelper);
+        this.unauthorizedHandler = unauthorizedHandler;
+        this.authTokenFilter = authTokenFilter;
+    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

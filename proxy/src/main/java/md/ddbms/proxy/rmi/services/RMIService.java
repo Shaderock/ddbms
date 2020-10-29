@@ -1,14 +1,20 @@
 package md.ddbms.proxy.rmi.services;
 
+import exceptions.WrongRMIServiceGenericType;
 import org.springframework.remoting.rmi.RmiProxyFactoryBean;
-import services.RMIServiceType;
+import services.interfaces.Service;
 
-public class RMIService extends RmiProxyFactoryBean {
-    public RMIService(int dataWarehousePort, RMIServiceType RMIServiceType, Class<?> serviceInterface) {
-        // todo remove
-        System.out.println("creating rmi service: " + serviceInterface.getSimpleName());
-        this.setServiceUrl("rmi://localhost:" + (dataWarehousePort +
-                RMIServiceType.getPortIncrement()) + "/" + serviceInterface.getSimpleName());
-        this.setServiceInterface(serviceInterface);
+// T should be extended from services.interfaces.Service
+public class RMIService <T> extends RmiProxyFactoryBean {
+
+    public RMIService(int dataWarehousePort, Class<T> typeClass)
+            throws WrongRMIServiceGenericType {
+        if (! Service.class.isAssignableFrom(typeClass)) {
+            throw new WrongRMIServiceGenericType("Can't create RMIService for nonService class (" +
+                    typeClass.getSimpleName() + ")");
+        }
+
+        this.setServiceUrl("rmi://localhost:" + dataWarehousePort + "/" + typeClass.getSimpleName());
+        this.setServiceInterface(typeClass);
     }
 }

@@ -1,18 +1,26 @@
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\dtos\MessageDTO.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\exceptions\FriendAlreadyAddedException.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\services\RMIServiceType.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\exceptions\UserNotFoundException.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\models\MessageHistory.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\services\interfaces\IEchoService.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\services\interfaces\ISequenceGeneratorService.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\exceptions\MessageHistoryNotFoundException.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\models\DatabaseSequence.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\exceptions\FriendDoesNotExistException.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\exceptions\LoginAlreadyExistsException.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\models\Message.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\exceptions\MultiChatsException.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\models\User.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\exceptions\InconsistentDBException.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\services\interfaces\IMessageService.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\dtos\UserDTO.java
-F:\University\tmp projects\ddbms\ddbms\rmi\src\main\java\services\interfaces\IUserService.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\services\interfaces\IMessageService.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\dtos\MessageDTO.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\exceptions\InconsistentDBException.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\exceptions\MessageHistoryNotFoundException.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\utils\PortSettingsReader.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\exceptions\NoSuchRMIServiceException.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\models\MessageHistory.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\exceptions\MultiChatsException.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\exceptions\WrongRMIServiceGenericType.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\dtos\UserDTO.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\exceptions\NoSuchServiceException.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\services\interfaces\IUserService.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\models\DatabaseSequence.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\utils\ServiceNameToServiceMap.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\exceptions\UserNotFoundException.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\exceptions\FriendAlreadyAddedException.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\models\Message.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\services\interfaces\Service.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\models\port_settings\ServerPortSettings.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\services\interfaces\ISequenceGeneratorService.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\models\port_settings\DatawarehousePortSettings.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\config\server\settings\IServerPortSettingsConfig.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\exceptions\FriendDoesNotExistException.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\exceptions\LoginAlreadyExistsException.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\models\port_settings\ServicePortSettings.java
+C:\Users\User\Desktop\4 курс\1 семестр\PAD\Lab2\ddbms\rmi\src\main\java\models\User.java
