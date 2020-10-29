@@ -1,5 +1,6 @@
 package md.ddbms.proxy.controllers;
 
+import lombok.RequiredArgsConstructor;
 import md.ddbms.rmi.dtos.MessageDTO;
 import md.ddbms.rmi.exceptions.*;
 import md.ddbms.proxy.models.responses.ChatListResponse;
@@ -16,15 +17,10 @@ import md.ddbms.rmi.interfaces.IMessageService;
 import javax.validation.Valid;
 
 @RestController
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping(value = "/message")
 public class MessageController extends XmlJsonController {
     private final IMessageService messageService;
-
-    public MessageController(IRMIServiceHelper rmiServiceHelper) {
-        this.messageService = new MessageServiceProxy(rmiServiceHelper);
-    }
-
 
     @PostMapping(value = "/send")
     public ResponseEntity<Response<String>> sendMessage(@RequestParam(name = "to") int receiverId,

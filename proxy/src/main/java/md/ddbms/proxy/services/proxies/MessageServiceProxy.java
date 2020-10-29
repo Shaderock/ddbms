@@ -1,12 +1,12 @@
 package md.ddbms.proxy.services.proxies;
 
-import md.ddbms.rmi.dtos.MessageDTO;
-import md.ddbms.rmi.exceptions.*;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.proxy.utils.IRMIServiceHelper;
+import md.ddbms.rmi.dtos.MessageDTO;
+import md.ddbms.rmi.exceptions.*;
+import md.ddbms.rmi.interfaces.IMessageService;
 import md.ddbms.rmi.models.MessageHistory;
 import md.ddbms.rmi.models.User;
-import md.ddbms.rmi.interfaces.IMessageService;
 
 import java.util.List;
 

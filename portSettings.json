@@ -43,7 +43,7 @@
       "servicePortSettings": [
         {
           "serviceName": "IMessageService",
-          "servicePort": 53001
+          "servicePort": 53004
         },
         {
           "serviceName": "ISequenceGeneratorService",

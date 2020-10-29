@@ -1,6 +1,7 @@
 package md.ddbms.proxy.controllers;
 
 import com.sun.istack.NotNull;
+import lombok.RequiredArgsConstructor;
 import md.ddbms.rmi.dtos.UserDTO;
 import md.ddbms.rmi.exceptions.LoginAlreadyExistsException;
 import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
@@ -22,20 +23,12 @@ import javax.validation.Valid;
 
 @CrossOrigin("*")
 @RestController
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class AuthController extends XmlJsonController {
     private final IUserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
-
-    public AuthController(IRMIServiceHelper rmiServiceHelper, BCryptPasswordEncoder bCryptPasswordEncoder,
-                          AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
-        this.userService = new UserServiceProxy(rmiServiceHelper);
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.authenticationManager = authenticationManager;
-        this.jwtUtils = jwtUtils;
-    }
 
     @PostMapping("/register")
     public ResponseEntity<Response<String>> registerUser(@RequestBody @Valid UserDTO userDTO)

@@ -1,14 +1,14 @@
 package md.ddbms.proxy.services.proxies;
 
-import md.ddbms.rmi.dtos.UserDTO;
-import md.ddbms.rmi.exceptions.*;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import md.ddbms.proxy.utils.IRMIServiceHelper;
+import md.ddbms.rmi.dtos.UserDTO;
+import md.ddbms.rmi.exceptions.*;
+import md.ddbms.rmi.interfaces.IUserService;
 import md.ddbms.rmi.models.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import md.ddbms.rmi.interfaces.IUserService;
 
 import java.util.List;
 

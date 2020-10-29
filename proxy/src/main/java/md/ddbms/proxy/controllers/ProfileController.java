@@ -1,29 +1,23 @@
 package md.ddbms.proxy.controllers;
 
+import lombok.RequiredArgsConstructor;
+import md.ddbms.proxy.models.responses.UserResponse;
+import md.ddbms.proxy.utils.AuthenticationHelper;
 import md.ddbms.rmi.dtos.UserDTO;
 import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
 import md.ddbms.rmi.exceptions.UserNotFoundException;
-import md.ddbms.proxy.models.responses.UserResponse;
-import md.ddbms.proxy.services.proxies.UserServiceProxy;
-import md.ddbms.proxy.utils.AuthenticationHelper;
-import md.ddbms.proxy.utils.IRMIServiceHelper;
+import md.ddbms.rmi.interfaces.IUserService;
 import md.ddbms.rmi.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import md.ddbms.rmi.interfaces.IUserService;
 
 @RestController
 @RequestMapping(value = "/profile")
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class ProfileController extends XmlJsonController {
     private final IUserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    public ProfileController(IRMIServiceHelper rmiServiceHelper, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userService = new UserServiceProxy(rmiServiceHelper);
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
 
     @GetMapping
     public ResponseEntity<UserResponse> getProfile() {

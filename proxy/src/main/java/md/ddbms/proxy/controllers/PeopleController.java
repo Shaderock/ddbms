@@ -1,5 +1,6 @@
 package md.ddbms.proxy.controllers;
 
+import lombok.RequiredArgsConstructor;
 import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
 import md.ddbms.proxy.models.responses.UsersResponse;
 import md.ddbms.proxy.services.proxies.UserServiceProxy;
@@ -13,14 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import md.ddbms.rmi.interfaces.IUserService;
 
 @RestController
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping(value = "/people")
 public class PeopleController extends XmlJsonController {
     private final IUserService userService;
-
-    public PeopleController(IRMIServiceHelper rmiServiceHelper) {
-        this.userService = new UserServiceProxy(rmiServiceHelper);
-    }
 
     @GetMapping(value = "/search")
     public ResponseEntity<UsersResponse> searchPeople(@RequestParam String searchQuery)
