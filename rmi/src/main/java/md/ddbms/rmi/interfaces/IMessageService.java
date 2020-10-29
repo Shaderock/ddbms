@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface IMessageService extends Service {
     void sendMessage(User user, int toUser, MessageDTO messageDTO)
-            throws UserNotFoundException, MultiChatsException, InconsistentDBException, NoSuchRMIServiceException;
+            throws UserNotFoundException, MultiChatsException, InconsistentDBException, NoSuchRMIServiceException, ProxyRMIServiceNotFound;
 
     MessageHistory getMessageHistory(User user, int withUserId)
-            throws MultiChatsException, InconsistentDBException, UserNotFoundException, MessageHistoryNotFoundException, NoSuchRMIServiceException;
+            throws MultiChatsException, InconsistentDBException, UserNotFoundException, MessageHistoryNotFoundException, NoSuchRMIServiceException, ProxyRMIServiceNotFound;
 
-    List<MessageHistory> getChatList(User user) throws NoSuchRMIServiceException;
+    List<MessageHistory> getChatList(User user) throws NoSuchRMIServiceException, ProxyRMIServiceNotFound;
 }

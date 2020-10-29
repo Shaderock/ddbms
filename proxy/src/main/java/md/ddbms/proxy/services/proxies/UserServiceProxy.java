@@ -2,7 +2,9 @@ package md.ddbms.proxy.services.proxies;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import md.ddbms.proxy.utils.IRMIServiceHelper;
+import md.ddbms.proxy.rmi.services.IRMIServiceHelper;
+import md.ddbms.proxy.rmi.services.IRMIServiceStorage;
+import md.ddbms.proxy.rmi.services.RMIServiceHelper;
 import md.ddbms.rmi.dtos.UserDTO;
 import md.ddbms.rmi.exceptions.*;
 import md.ddbms.rmi.interfaces.IUserService;
@@ -14,62 +16,99 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class UserServiceProxy implements IUserService {
-    private final IRMIServiceHelper rmiServiceHelper;
+    private final IRMIServiceStorage rmiServiceStorage;
 
     @Override
-    public User create(UserDTO userDTO) throws LoginAlreadyExistsException, NoSuchRMIServiceException {
-        return rmiServiceHelper.getWriteService(IUserService.class).create(userDTO);
+    public User create(UserDTO userDTO)
+            throws LoginAlreadyExistsException, NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        User user = rmiServiceHelper.getService(IUserService.class).create(userDTO);
+        rmiServiceHelper.release();
+        return user;
     }
 
     @Override
-    public User update(User user, UserDTO userDTO) throws NoSuchRMIServiceException {
-        return rmiServiceHelper.getWriteService(IUserService.class).update(user, userDTO);
+    public User update(User user, UserDTO userDTO) throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        User updatedUser = rmiServiceHelper.getService(IUserService.class).update(user, userDTO);
+        rmiServiceHelper.release();
+        return updatedUser;
     }
 
     @Override
-    public User getById(int id) throws UserNotFoundException, NoSuchRMIServiceException {
-        return rmiServiceHelper.getReadService(IUserService.class).getById(id);
+    public User getById(int id) throws UserNotFoundException, NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        User user = rmiServiceHelper.getService(IUserService.class).getById(id);
+        rmiServiceHelper.release();
+        return user;
     }
 
     @Override
-    public User getByLogin(String login) throws UserNotFoundException, NoSuchRMIServiceException {
-        return rmiServiceHelper.getReadService(IUserService.class).getByLogin(login);
+    public User getByLogin(String login)
+            throws UserNotFoundException, NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        User user = rmiServiceHelper.getService(IUserService.class).getByLogin(login);
+        rmiServiceHelper.release();
+        return user;
     }
 
     @Override
-    public List<User> search(String searchQuery) throws NoSuchRMIServiceException {
-        return rmiServiceHelper.getReadService(IUserService.class).search(searchQuery);
+    public List<User> search(String searchQuery) throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        List<User> users = rmiServiceHelper.getService(IUserService.class).search(searchQuery);
+        rmiServiceHelper.release();
+        return users;
     }
 
     @Override
-    public List<User> getAllFriends(User user) throws NoSuchRMIServiceException {
-        return rmiServiceHelper.getReadService(IUserService.class).getAllFriends(user);
+    public List<User> getAllFriends(User user) throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        List<User> users = rmiServiceHelper.getService(IUserService.class).getAllFriends(user);
+        rmiServiceHelper.release();
+        return users;
     }
 
     @Override
     public void addFriend(User user, int friendId)
-            throws UserNotFoundException, FriendAlreadyAddedException, NoSuchRMIServiceException {
-        rmiServiceHelper.getWriteService(IUserService.class).addFriend(user, friendId);
+            throws UserNotFoundException, FriendAlreadyAddedException,
+            NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        rmiServiceHelper.getService(IUserService.class).addFriend(user, friendId);
+        rmiServiceHelper.release();
     }
 
     @Override
-    public void removeFriend(User user, int friendId) throws UserNotFoundException, FriendDoesNotExistException, NoSuchRMIServiceException {
-        rmiServiceHelper.getWriteService(IUserService.class).removeFriend(user, friendId);
+    public void removeFriend(User user, int friendId)
+            throws UserNotFoundException, FriendDoesNotExistException,
+            NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        rmiServiceHelper.getService(IUserService.class).removeFriend(user, friendId);
+        rmiServiceHelper.release();
     }
 
     @Override
-    public List<User> searchFriend(User user, String searchQuery) throws NoSuchRMIServiceException {
-        return rmiServiceHelper.getReadService(IUserService.class).searchFriend(user, searchQuery);
+    public List<User> searchFriend(User user, String searchQuery)
+            throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        List<User> users = rmiServiceHelper.getService(IUserService.class).searchFriend(user, searchQuery);
+        rmiServiceHelper.release();
+        return users;
     }
 
     @Override
-    public List<User> getAll() throws NoSuchRMIServiceException {
-        return rmiServiceHelper.getReadService(IUserService.class).getAll();
+    public List<User> getAll() throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        List<User> users = rmiServiceHelper.getService(IUserService.class).getAll();
+        rmiServiceHelper.release();
+        return users;
     }
 
-    @SneakyThrows(NoSuchRMIServiceException.class)
+    @SneakyThrows({NoSuchRMIServiceException.class, ProxyRMIServiceNotFound.class})
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return rmiServiceHelper.getReadService(IUserService.class).loadUserByUsername(username);
+        IRMIServiceHelper rmiServiceHelper = new RMIServiceHelper(rmiServiceStorage);
+        UserDetails userDetails = rmiServiceHelper.getService(IUserService.class).loadUserByUsername(username);
+        rmiServiceHelper.release();
+        return userDetails;
     }
 }

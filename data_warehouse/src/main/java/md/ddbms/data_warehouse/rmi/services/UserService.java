@@ -31,7 +31,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User create(UserDTO userDTO) throws LoginAlreadyExistsException, NoSuchRMIServiceException {
+    public User create(UserDTO userDTO) throws LoginAlreadyExistsException,
+            NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         Optional<User> user = userRepository.findByLogin(userDTO.getLogin());
         if (user.isPresent()) {
             throw new LoginAlreadyExistsException("Login " + userDTO.getLogin() + " already exists");

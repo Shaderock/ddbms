@@ -8,8 +8,7 @@ import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
 import md.ddbms.proxy.config.jwt.JwtUtils;
 import md.ddbms.proxy.models.responses.JwtResponse;
 import md.ddbms.proxy.models.responses.Response;
-import md.ddbms.proxy.services.proxies.UserServiceProxy;
-import md.ddbms.proxy.utils.IRMIServiceHelper;
+import md.ddbms.rmi.exceptions.ProxyRMIServiceNotFound;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,7 +31,7 @@ public class AuthController extends XmlJsonController {
 
     @PostMapping("/register")
     public ResponseEntity<Response<String>> registerUser(@RequestBody @Valid UserDTO userDTO)
-            throws LoginAlreadyExistsException, NoSuchRMIServiceException {
+            throws LoginAlreadyExistsException, NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         userService.create(userDTO);
 

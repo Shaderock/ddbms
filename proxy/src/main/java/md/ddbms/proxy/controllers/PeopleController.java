@@ -3,9 +3,8 @@ package md.ddbms.proxy.controllers;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
 import md.ddbms.proxy.models.responses.UsersResponse;
-import md.ddbms.proxy.services.proxies.UserServiceProxy;
 import md.ddbms.proxy.utils.AuthenticationHelper;
-import md.ddbms.proxy.utils.IRMIServiceHelper;
+import md.ddbms.rmi.exceptions.ProxyRMIServiceNotFound;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,7 @@ public class PeopleController extends XmlJsonController {
 
     @GetMapping(value = "/search")
     public ResponseEntity<UsersResponse> searchPeople(@RequestParam String searchQuery)
-            throws NoSuchRMIServiceException {
+            throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UsersResponse(userService.search(searchQuery)));
     }

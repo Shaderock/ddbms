@@ -27,7 +27,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
         ConnectionString connectionString =
                 new ConnectionString("mongodb://localhost:" +
                         DataWarehouseContext.datawarehousePortSettings.getMongoDBPort() + "/" +
-                        getDatabaseName());
+                        getDatabaseName() + "?replicaSet=bestsnRepl&readPreference=nearest");
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
                 .build();

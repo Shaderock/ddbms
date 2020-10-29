@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import md.ddbms.proxy.services.proxies.MessageServiceProxy;
 import md.ddbms.proxy.services.proxies.SequenceGeneratorServiceProxy;
 import md.ddbms.proxy.services.proxies.UserServiceProxy;
-import md.ddbms.proxy.utils.IRMIServiceHelper;
+import md.ddbms.proxy.rmi.services.IRMIServiceStorage;
 import md.ddbms.rmi.interfaces.IMessageService;
 import md.ddbms.rmi.interfaces.ISequenceGeneratorService;
 import md.ddbms.rmi.interfaces.IUserService;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 public class ProxyServicesConfig {
-    private final IRMIServiceHelper rmiServiceHelper;
+    private final IRMIServiceStorage rmiServiceHelper;
 
     @Bean
     public IMessageService messageService() {

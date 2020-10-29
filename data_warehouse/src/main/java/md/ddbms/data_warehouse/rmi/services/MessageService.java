@@ -24,7 +24,9 @@ public class MessageService implements IMessageService {
     @Override
     @Transactional
     public void sendMessage(User sender, int receiverId, MessageDTO messageDTO)
-            throws UserNotFoundException, MultiChatsException, InconsistentDBException, NoSuchRMIServiceException {
+            throws UserNotFoundException, MultiChatsException,
+            InconsistentDBException, NoSuchRMIServiceException,
+            ProxyRMIServiceNotFound {
 
         MessageHistory messageHistory;
         try {
@@ -44,7 +46,7 @@ public class MessageService implements IMessageService {
 
     public MessageHistory getMessageHistory(User user, int withUserId)
             throws MultiChatsException, InconsistentDBException, UserNotFoundException,
-            MessageHistoryNotFoundException, NoSuchRMIServiceException {
+            MessageHistoryNotFoundException, NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         User withUser = userService.getById(withUserId);
         List<MessageHistory> messageHistoryUserList = messageHistoryRepository
                 .findByUsersId(user.getId());

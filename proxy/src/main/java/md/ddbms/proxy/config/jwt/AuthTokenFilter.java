@@ -1,7 +1,7 @@
 package md.ddbms.proxy.config.jwt;
 
 import md.ddbms.proxy.services.proxies.UserServiceProxy;
-import md.ddbms.proxy.utils.IRMIServiceHelper;
+import md.ddbms.proxy.rmi.services.IRMIServiceStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,7 +26,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private final IUserService userService;
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
-    public AuthTokenFilter(JwtUtils jwtUtils, IRMIServiceHelper rmiServiceHelper) {
+    public AuthTokenFilter(JwtUtils jwtUtils, IRMIServiceStorage rmiServiceHelper) {
         this.jwtUtils = jwtUtils;
         this.userService = new UserServiceProxy(rmiServiceHelper);
     }

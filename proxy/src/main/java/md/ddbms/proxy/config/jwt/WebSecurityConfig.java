@@ -1,7 +1,7 @@
 package md.ddbms.proxy.config.jwt;
 
 import md.ddbms.proxy.services.proxies.UserServiceProxy;
-import md.ddbms.proxy.utils.IRMIServiceHelper;
+import md.ddbms.proxy.rmi.services.IRMIServiceStorage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthEntryPointJwt unauthorizedHandler;
     private final AuthTokenFilter authTokenFilter;
 
-    public WebSecurityConfig(IRMIServiceHelper rmiServiceHelper, AuthEntryPointJwt unauthorizedHandler, AuthTokenFilter authTokenFilter) {
+    public WebSecurityConfig(IRMIServiceStorage rmiServiceHelper, AuthEntryPointJwt unauthorizedHandler, AuthTokenFilter authTokenFilter) {
         this.userService = new UserServiceProxy(rmiServiceHelper);
         this.unauthorizedHandler = unauthorizedHandler;
         this.authTokenFilter = authTokenFilter;
