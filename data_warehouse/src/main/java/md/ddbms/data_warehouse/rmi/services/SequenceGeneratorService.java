@@ -2,9 +2,9 @@ package md.ddbms.data_warehouse.rmi.services;
 
 import lombok.RequiredArgsConstructor;
 import md.ddbms.data_warehouse.repositories.SequenceGeneratorRepository;
-import models.DatabaseSequence;
+import md.ddbms.rmi.models.DatabaseSequence;
 import org.springframework.stereotype.Service;
-import services.interfaces.ISequenceGeneratorService;
+import md.ddbms.rmi.interfaces.ISequenceGeneratorService;
 
 @Service
 @RequiredArgsConstructor

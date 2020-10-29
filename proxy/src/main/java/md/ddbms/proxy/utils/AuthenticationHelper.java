@@ -1,7 +1,7 @@
 package md.ddbms.proxy.utils;
 
 
-import models.User;
+import md.ddbms.rmi.models.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class AuthenticationHelper {

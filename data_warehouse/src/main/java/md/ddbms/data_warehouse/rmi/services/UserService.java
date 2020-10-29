@@ -1,16 +1,16 @@
 package md.ddbms.data_warehouse.rmi.services;
 
-import dtos.UserDTO;
-import exceptions.*;
+import md.ddbms.rmi.dtos.UserDTO;
+import md.ddbms.rmi.exceptions.*;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.data_warehouse.repositories.UserRepository;
-import models.User;
+import md.ddbms.rmi.models.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import services.interfaces.ISequenceGeneratorService;
-import services.interfaces.IUserService;
+import md.ddbms.rmi.interfaces.ISequenceGeneratorService;
+import md.ddbms.rmi.interfaces.IUserService;
 
 import java.util.*;
 

@@ -1,10 +1,10 @@
 package md.ddbms.proxy.rmi.services;
 
-import exceptions.WrongRMIServiceGenericType;
+import md.ddbms.rmi.exceptions.WrongRMIServiceGenericType;
 import org.springframework.remoting.rmi.RmiProxyFactoryBean;
-import services.interfaces.Service;
+import md.ddbms.rmi.interfaces.Service;
 
-// T should be extended from services.interfaces.Service
+// T should be extended from md.ddbms.rmi.interfaces.Service
 public class RMIService <T> extends RmiProxyFactoryBean {
 
     public RMIService(int dataWarehousePort, Class<T> typeClass)

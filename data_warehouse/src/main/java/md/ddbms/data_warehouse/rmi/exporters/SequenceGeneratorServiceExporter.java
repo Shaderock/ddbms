@@ -1,11 +1,10 @@
 package md.ddbms.data_warehouse.rmi.exporters;
 
-import exceptions.NoSuchServiceException;
+import md.ddbms.rmi.exceptions.NoSuchServiceException;
 import md.ddbms.data_warehouse.utils.DataWarehouseContext;
 import org.springframework.remoting.rmi.RmiServiceExporter;
 import org.springframework.stereotype.Component;
-import services.interfaces.IMessageService;
-import services.interfaces.ISequenceGeneratorService;
+import md.ddbms.rmi.interfaces.ISequenceGeneratorService;
 
 @Component
 public class SequenceGeneratorServiceExporter extends RmiServiceExporter {

@@ -1,6 +1,6 @@
 package md.ddbms.data_warehouse.repositories;
 
-import models.User;
+import md.ddbms.rmi.models.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Collection;

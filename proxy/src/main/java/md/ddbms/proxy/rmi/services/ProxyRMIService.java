@@ -1,8 +1,8 @@
 package md.ddbms.proxy.rmi.services;
 
-import exceptions.NoSuchRMIServiceException;
-import exceptions.WrongRMIServiceGenericType;
-import services.interfaces.Service;
+import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
+import md.ddbms.rmi.exceptions.WrongRMIServiceGenericType;
+import md.ddbms.rmi.interfaces.Service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class ProxyRMIService implements IProxyRMIService {
         RMIService<? extends Service> rmiService = rmiServiceMap.get(serviceClass);
         if (rmiService == null) {
             throw new NoSuchRMIServiceException("The RMI service of class = '"
-                    + serviceClass.getSimpleName() + "' was not found in list of RMI services");
+                    + serviceClass.getSimpleName() + "' was not found in list of RMI md.ddbms.rmi.services");
         }
         return rmiService;
     }

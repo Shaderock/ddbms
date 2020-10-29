@@ -1,9 +1,9 @@
 package md.ddbms.proxy.controllers;
 
 import com.sun.istack.NotNull;
-import dtos.UserDTO;
-import exceptions.LoginAlreadyExistsException;
-import exceptions.NoSuchRMIServiceException;
+import md.ddbms.rmi.dtos.UserDTO;
+import md.ddbms.rmi.exceptions.LoginAlreadyExistsException;
+import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
 import md.ddbms.proxy.config.jwt.JwtUtils;
 import md.ddbms.proxy.models.responses.JwtResponse;
 import md.ddbms.proxy.models.responses.Response;
@@ -16,7 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import services.interfaces.IUserService;
+import md.ddbms.rmi.interfaces.IUserService;
 
 import javax.validation.Valid;
 

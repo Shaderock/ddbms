@@ -1,8 +1,8 @@
 package md.ddbms.proxy.rmi.services;
 
-import exceptions.NoSuchRMIServiceException;
-import exceptions.WrongRMIServiceGenericType;
-import services.interfaces.Service;
+import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
+import md.ddbms.rmi.exceptions.WrongRMIServiceGenericType;
+import md.ddbms.rmi.interfaces.Service;
 
 public interface IProxyRMIService {
 

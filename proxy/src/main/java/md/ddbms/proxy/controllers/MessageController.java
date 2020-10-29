@@ -1,17 +1,17 @@
 package md.ddbms.proxy.controllers;
 
-import dtos.MessageDTO;
-import exceptions.*;
+import md.ddbms.rmi.dtos.MessageDTO;
+import md.ddbms.rmi.exceptions.*;
 import md.ddbms.proxy.models.responses.ChatListResponse;
 import md.ddbms.proxy.models.responses.MessageHistoryResponse;
 import md.ddbms.proxy.models.responses.Response;
 import md.ddbms.proxy.services.proxies.MessageServiceProxy;
 import md.ddbms.proxy.utils.AuthenticationHelper;
 import md.ddbms.proxy.utils.IRMIServiceHelper;
-import models.User;
+import md.ddbms.rmi.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import services.interfaces.IMessageService;
+import md.ddbms.rmi.interfaces.IMessageService;
 
 import javax.validation.Valid;
 

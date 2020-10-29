@@ -1,9 +1,9 @@
 package md.ddbms.proxy.controllers.advices;
 
 
-import exceptions.MessageHistoryNotFoundException;
-import exceptions.MultiChatsException;
-import exceptions.UserNotFoundException;
+import md.ddbms.rmi.exceptions.MessageHistoryNotFoundException;
+import md.ddbms.rmi.exceptions.MultiChatsException;
+import md.ddbms.rmi.exceptions.UserNotFoundException;
 import md.ddbms.proxy.controllers.MessageController;
 import md.ddbms.proxy.models.responses.ErrorResponse;
 import org.springframework.http.HttpStatus;

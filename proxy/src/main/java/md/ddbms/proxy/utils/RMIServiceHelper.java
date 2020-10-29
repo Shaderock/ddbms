@@ -1,17 +1,17 @@
 package md.ddbms.proxy.utils;
 
-import exceptions.NoSuchRMIServiceException;
-import exceptions.NoSuchServiceException;
-import exceptions.WrongRMIServiceGenericType;
+import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
+import md.ddbms.rmi.exceptions.NoSuchServiceException;
+import md.ddbms.rmi.exceptions.WrongRMIServiceGenericType;
 import md.ddbms.proxy.rmi.services.IProxyRMIService;
 import md.ddbms.proxy.rmi.services.ProxyRMIService;
-import models.port_settings.DatawarehousePortSettings;
-import models.port_settings.ServerPortSettings;
-import models.port_settings.ServicePortSettings;
+import md.ddbms.rmi.models.port_settings.DatawarehousePortSettings;
+import md.ddbms.rmi.models.port_settings.ServerPortSettings;
+import md.ddbms.rmi.models.port_settings.ServicePortSettings;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import services.interfaces.Service;
-import utils.ServiceNameToServiceMap;
+import md.ddbms.rmi.interfaces.Service;
+import md.ddbms.rmi.utils.ServiceNameToServiceMap;
 
 import java.util.ArrayList;
 import java.util.List;

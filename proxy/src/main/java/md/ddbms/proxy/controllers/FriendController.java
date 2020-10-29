@@ -1,19 +1,18 @@
 package md.ddbms.proxy.controllers;
 
-import exceptions.FriendAlreadyAddedException;
-import exceptions.FriendDoesNotExistException;
-import exceptions.NoSuchRMIServiceException;
-import exceptions.UserNotFoundException;
-import lombok.RequiredArgsConstructor;
+import md.ddbms.rmi.exceptions.FriendAlreadyAddedException;
+import md.ddbms.rmi.exceptions.FriendDoesNotExistException;
+import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
+import md.ddbms.rmi.exceptions.UserNotFoundException;
 import md.ddbms.proxy.models.responses.Response;
 import md.ddbms.proxy.models.responses.UsersResponse;
 import md.ddbms.proxy.services.proxies.UserServiceProxy;
 import md.ddbms.proxy.utils.AuthenticationHelper;
 import md.ddbms.proxy.utils.IRMIServiceHelper;
-import models.User;
+import md.ddbms.rmi.models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import services.interfaces.IUserService;
+import md.ddbms.rmi.interfaces.IUserService;
 
 @RestController
 @RequestMapping(value = "/friends")

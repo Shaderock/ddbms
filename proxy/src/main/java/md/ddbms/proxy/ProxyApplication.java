@@ -1,6 +1,7 @@
 package md.ddbms.proxy;
 
-import config.server.settings.ServerPortSettingsConfig;
+
+import md.ddbms.rmi.config.settings.server.ServerPortSettingsConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;

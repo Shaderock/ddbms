@@ -1,7 +1,7 @@
 package md.ddbms.data_warehouse.repositories;
 
 
-import models.MessageHistory;
+import md.ddbms.rmi.models.MessageHistory;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

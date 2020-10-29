@@ -1,7 +1,7 @@
 package md.ddbms.proxy.controllers.advices;
 
 
-import exceptions.LoginAlreadyExistsException;
+import md.ddbms.rmi.exceptions.LoginAlreadyExistsException;
 import md.ddbms.proxy.controllers.AuthController;
 import md.ddbms.proxy.models.responses.ErrorResponse;
 import org.springframework.http.HttpStatus;

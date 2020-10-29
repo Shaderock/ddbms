@@ -1,8 +1,8 @@
 package md.ddbms.proxy.models.responses;
 
 import lombok.Data;
-import models.Message;
-import models.MessageHistory;
+import md.ddbms.rmi.models.Message;
+import md.ddbms.rmi.models.MessageHistory;
 
 import java.util.List;
 

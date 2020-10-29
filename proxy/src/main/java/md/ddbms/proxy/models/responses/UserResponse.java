@@ -2,7 +2,7 @@ package md.ddbms.proxy.models.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import models.User;
+import md.ddbms.rmi.models.User;
 
 @Data
 @AllArgsConstructor

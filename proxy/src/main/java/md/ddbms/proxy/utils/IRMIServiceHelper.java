@@ -1,7 +1,7 @@
 package md.ddbms.proxy.utils;
 
-import exceptions.NoSuchRMIServiceException;
-import services.interfaces.Service;
+import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
+import md.ddbms.rmi.interfaces.Service;
 
 public interface IRMIServiceHelper {
     <T extends Service> T getReadService(Class<T> serviceClass) throws NoSuchRMIServiceException;

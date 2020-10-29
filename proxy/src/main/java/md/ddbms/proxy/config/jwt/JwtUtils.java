@@ -1,7 +1,7 @@
 package md.ddbms.proxy.config.jwt;
 
 import io.jsonwebtoken.*;
-import models.User;
+import md.ddbms.rmi.models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;

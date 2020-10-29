@@ -1,6 +1,6 @@
 package md.ddbms.proxy.controllers;
 
-import exceptions.NoSuchRMIServiceException;
+import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
 import md.ddbms.proxy.models.responses.UsersResponse;
 import md.ddbms.proxy.services.proxies.UserServiceProxy;
 import md.ddbms.proxy.utils.AuthenticationHelper;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import services.interfaces.IUserService;
+import md.ddbms.rmi.interfaces.IUserService;
 
 @RestController
 //@RequiredArgsConstructor

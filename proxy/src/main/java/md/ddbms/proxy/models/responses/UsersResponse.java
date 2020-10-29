@@ -1,7 +1,7 @@
 package md.ddbms.proxy.models.responses;
 
 import lombok.Data;
-import models.User;
+import md.ddbms.rmi.models.User;
 
 import java.util.ArrayList;
 import java.util.List;

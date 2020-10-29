@@ -1,8 +1,8 @@
 package md.ddbms.proxy.controllers.advices;
 
-import exceptions.FriendAlreadyAddedException;
-import exceptions.FriendDoesNotExistException;
-import exceptions.UserNotFoundException;
+import md.ddbms.rmi.exceptions.FriendAlreadyAddedException;
+import md.ddbms.rmi.exceptions.FriendDoesNotExistException;
+import md.ddbms.rmi.exceptions.UserNotFoundException;
 import md.ddbms.proxy.controllers.FriendController;
 import md.ddbms.proxy.models.responses.ErrorResponse;
 import org.springframework.http.HttpStatus;

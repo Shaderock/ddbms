@@ -1,7 +1,7 @@
 package md.ddbms.data_warehouse.utils;
 
-import models.port_settings.DatawarehousePortSettings;
-import models.port_settings.ServerPortSettings;
+import md.ddbms.rmi.models.port_settings.DatawarehousePortSettings;
+import md.ddbms.rmi.models.port_settings.ServerPortSettings;
 
 import java.util.Scanner;
 
