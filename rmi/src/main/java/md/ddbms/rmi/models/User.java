@@ -2,10 +2,12 @@ package md.ddbms.rmi.models;
 
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.springframework.data.redis.core.RedisHash;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +19,8 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+@RedisHash
+public class User implements UserDetails, Serializable {
     public static final String SEQUENCE_NAME = "userSequence";
 
     @Id
