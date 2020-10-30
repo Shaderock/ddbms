@@ -1,5 +1,7 @@
 package md.ddbms.proxy.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.proxy.models.responses.ChatListResponse;
 import md.ddbms.proxy.models.responses.MessageHistoryResponse;
@@ -25,6 +27,7 @@ public class MessageController extends XmlJsonController {
     private final IMessageHistoryCacheService messageHistoryCacheService;
 
     @PostMapping(value = "/send")
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<Response<String>> sendMessage(@RequestParam(name = "to") int receiverId,
                                                         @RequestBody @Valid MessageDTO messageDTO)
             throws UserNotFoundException, MultiChatsException, InconsistentDBException,
@@ -38,6 +41,7 @@ public class MessageController extends XmlJsonController {
     }
 
     @GetMapping(value = "/history")
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<MessageHistoryResponse> getMessageHistory(@RequestParam int withUserId)
             throws UserNotFoundException, MultiChatsException,
             InconsistentDBException, MessageHistoryNotFoundException,
@@ -55,6 +59,7 @@ public class MessageController extends XmlJsonController {
     }
 
     @GetMapping(value = "/chatlist")
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<ChatListResponse> getChatList()
             throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         User user = AuthenticationHelper.getAuthenticatedUser();

@@ -1,5 +1,7 @@
 package md.ddbms.proxy.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.rmi.exceptions.*;
 import md.ddbms.proxy.models.responses.Response;
@@ -17,12 +19,14 @@ public class FriendController extends XmlJsonController {
     private final IUserService userService;
 
     @GetMapping
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<UsersResponse> getAllFriends() throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UsersResponse(userService.getAllFriends(user)));
     }
 
     @PostMapping(value = "/add")
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<Response<String>> addFriend(@RequestParam(name = "userId") int friendId)
             throws UserNotFoundException, FriendAlreadyAddedException,
             NoSuchRMIServiceException, ProxyRMIServiceNotFound {
@@ -32,6 +36,7 @@ public class FriendController extends XmlJsonController {
     }
 
     @DeleteMapping(value = "/remove")
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<Response<String>> removeFriend(@RequestParam(name = "userId") int friendId)
             throws UserNotFoundException, FriendDoesNotExistException,
             NoSuchRMIServiceException, ProxyRMIServiceNotFound {
@@ -41,6 +46,7 @@ public class FriendController extends XmlJsonController {
     }
 
     @GetMapping(value = "/search")
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<UsersResponse> searchFriend(@RequestParam String searchQuery)
             throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         User user = AuthenticationHelper.getAuthenticatedUser();

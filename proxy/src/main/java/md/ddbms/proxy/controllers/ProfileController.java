@@ -1,5 +1,7 @@
 package md.ddbms.proxy.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.proxy.models.responses.UserResponse;
 import md.ddbms.proxy.utils.AuthenticationHelper;
@@ -21,12 +23,14 @@ public class ProfileController extends XmlJsonController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<UserResponse> getProfile() {
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UserResponse(user));
     }
 
     @GetMapping(value = "/{id}")
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<UserResponse> getProfileById(@PathVariable int id)
             throws UserNotFoundException, NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         AuthenticationHelper.getAuthenticatedUser();
@@ -34,6 +38,7 @@ public class ProfileController extends XmlJsonController {
     }
 
     @PutMapping
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<UserResponse> updateProfile(@RequestBody UserDTO userDTO)
             throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         User user = AuthenticationHelper.getAuthenticatedUser();

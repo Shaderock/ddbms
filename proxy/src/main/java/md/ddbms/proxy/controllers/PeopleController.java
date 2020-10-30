@@ -1,5 +1,7 @@
 package md.ddbms.proxy.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import md.ddbms.rmi.exceptions.NoSuchRMIServiceException;
 import md.ddbms.proxy.models.responses.UsersResponse;
@@ -19,6 +21,7 @@ public class PeopleController extends XmlJsonController {
     private final IUserService userService;
 
     @GetMapping(value = "/search")
+    @Operation(security = @SecurityRequirement(name = "bearerAuth"))
     public ResponseEntity<UsersResponse> searchPeople(@RequestParam String searchQuery)
             throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
         AuthenticationHelper.getAuthenticatedUser();
