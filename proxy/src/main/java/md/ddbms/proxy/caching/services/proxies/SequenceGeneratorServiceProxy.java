@@ -1,4 +1,4 @@
-package md.ddbms.proxy.services.proxies;
+package md.ddbms.proxy.caching.services.proxies;
 
 import lombok.RequiredArgsConstructor;
 import md.ddbms.proxy.rmi.services.IRMIServiceHelper;

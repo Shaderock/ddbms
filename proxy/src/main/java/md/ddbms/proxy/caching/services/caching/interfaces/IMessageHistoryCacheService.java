@@ -1,4 +1,4 @@
-package md.ddbms.proxy.services.caching.interfaces;
+package md.ddbms.proxy.caching.services.caching.interfaces;
 
 import md.ddbms.rmi.models.MessageHistory;
 

@@ -1,6 +1,6 @@
 package md.ddbms.proxy.config.jwt;
 
-import md.ddbms.proxy.services.proxies.UserServiceProxy;
+import md.ddbms.proxy.caching.services.proxies.UserServiceProxy;
 import md.ddbms.proxy.rmi.services.IRMIServiceStorage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

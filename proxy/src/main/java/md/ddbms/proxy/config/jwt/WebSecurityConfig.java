@@ -1,7 +1,7 @@
 package md.ddbms.proxy.config.jwt;
 
 import md.ddbms.proxy.rmi.services.IRMIServiceStorage;
-import md.ddbms.proxy.services.proxies.UserServiceProxy;
+import md.ddbms.proxy.caching.services.proxies.UserServiceProxy;
 import md.ddbms.rmi.interfaces.IUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;

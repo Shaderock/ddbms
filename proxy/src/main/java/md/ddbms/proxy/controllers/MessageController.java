@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import md.ddbms.proxy.models.responses.ChatListResponse;
 import md.ddbms.proxy.models.responses.MessageHistoryResponse;
 import md.ddbms.proxy.models.responses.Response;
-import md.ddbms.proxy.services.caching.interfaces.IMessageHistoryCacheService;
+import md.ddbms.proxy.caching.services.caching.interfaces.IMessageHistoryCacheService;
 import md.ddbms.proxy.utils.AuthenticationHelper;
 import md.ddbms.rmi.dtos.MessageDTO;
 import md.ddbms.rmi.exceptions.*;
@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 
 @RestController
 @RequiredArgsConstructor
