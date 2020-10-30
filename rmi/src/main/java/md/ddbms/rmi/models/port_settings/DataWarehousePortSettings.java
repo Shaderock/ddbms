@@ -10,7 +10,6 @@ public class DataWarehousePortSettings {
     private List<ServicePortSettings> servicePortSettings;
     private int mongoDBPort;
     private int ownSpringPort;
-    private boolean primary;
 
     public ServicePortSettings getServicePortSettingsByServiceName(String serviceName)
             throws NoSuchServiceException {

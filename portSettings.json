@@ -17,8 +17,7 @@
         }
       ],
       "mongoDBPort": 50001,
-      "ownSpringPort": 51000,
-      "primary": false
+      "ownSpringPort": 51000
     },
     {
       "servicePortSettings": [
@@ -36,8 +35,7 @@
         }
       ],
       "mongoDBPort": 50002,
-      "ownSpringPort": 52000,
-      "primary": false
+      "ownSpringPort": 52000
     },
     {
       "servicePortSettings": [
@@ -55,8 +53,7 @@
         }
       ],
       "mongoDBPort": 50003,
-      "ownSpringPort": 53000,
-      "primary": true
+      "ownSpringPort": 53000
     }
   ]
 }
