@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 @SpringBootApplication(exclude = {
         DataSourceAutoConfiguration.class,
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Import;
         HibernateJpaAutoConfiguration.class
 })
 @Import(ServerPortSettingsConfig.class)
+@EnableRedisRepositories
 public class ProxyApplication {
 
     public static void main(String[] args) {

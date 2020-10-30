@@ -2,15 +2,13 @@ package md.ddbms.proxy.services.caching.interfaces;
 
 import md.ddbms.rmi.models.MessageHistory;
 
-import java.util.ArrayList;
-
 public interface IMessageHistoryCacheService {
 
-    MessageHistory getMessageHistoryFromCache(ArrayList<Integer> usersID);
+    MessageHistory getMessageHistoryFromCache(int userId1, int userId2);
 
-    boolean messageHistoryStoredInCache(ArrayList<Integer> usersId);
+    boolean messageHistoryStoredInCache(int userId1, int userId2);
 
-    void  deleteMessageHistoryFromCache(ArrayList<Integer> usersID);
+    void  deleteMessageHistoryFromCache(int userId1, int userId2);
 
     void pushMessageHistoryToCache(MessageHistory messageHistory);
 }
