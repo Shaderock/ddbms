@@ -5,9 +5,11 @@ import md.ddbms.proxy.caching.models.CachedMessageHistory;
 import md.ddbms.proxy.caching.repositories.MessageHistoryCacheRepository;
 import md.ddbms.proxy.services.caching.interfaces.IMessageHistoryCacheService;
 import md.ddbms.rmi.models.MessageHistory;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor

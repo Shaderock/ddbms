@@ -1,7 +1,8 @@
 package md.ddbms.proxy.config.jwt;
 
-import md.ddbms.proxy.services.proxies.UserServiceProxy;
 import md.ddbms.proxy.rmi.services.IRMIServiceStorage;
+import md.ddbms.proxy.services.proxies.UserServiceProxy;
+import md.ddbms.rmi.interfaces.IUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,7 +14,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import md.ddbms.rmi.interfaces.IUserService;
 
 //@RequiredArgsConstructor
 @EnableWebSecurity
@@ -61,6 +61,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/v3/**").permitAll()
+                .antMatchers("/configuration/ui").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/configuration/security").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
