@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@RedisHash("cached message history")
+@RedisHash(value = "cached message history", timeToLive = 600)
 public class CachedMessageHistory {
     @Id
     private String id;

@@ -1,11 +1,12 @@
 package md.ddbms.proxy.controllers.advices;
 
 
+import md.ddbms.proxy.controllers.MessageController;
+import md.ddbms.proxy.models.responses.ErrorResponse;
+import md.ddbms.rmi.exceptions.InconsistentDBException;
 import md.ddbms.rmi.exceptions.MessageHistoryNotFoundException;
 import md.ddbms.rmi.exceptions.MultiChatsException;
 import md.ddbms.rmi.exceptions.UserNotFoundException;
-import md.ddbms.proxy.controllers.MessageController;
-import md.ddbms.proxy.models.responses.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,5 +19,10 @@ public class MessageControllerAdvice {
             MessageHistoryNotFoundException.class})
     public ResponseEntity<ErrorResponse> handleMessageActionException(Exception e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(InconsistentDBException.class)
+    public ResponseEntity<ErrorResponse> handleInternalServerException(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(e.getMessage()));
     }
 }
