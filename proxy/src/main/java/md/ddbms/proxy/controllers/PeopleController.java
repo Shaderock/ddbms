@@ -31,6 +31,7 @@ public class PeopleController {
             content = @Content(schema = @Schema(implementation = UsersResponse.class)))
     public ResponseEntity<UsersResponse> searchPeople(@RequestParam String searchQuery)
             throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+
         AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UsersResponse(userService.search(searchQuery)));
     }

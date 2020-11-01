@@ -35,6 +35,7 @@ public class ProfileController {
     @ApiResponse(responseCode = "200", description = "Returned profile",
             content = @Content(schema = @Schema(implementation = UserResponse.class)))
     public ResponseEntity<UserResponse> getProfile() {
+
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UserResponse(user));
     }
@@ -51,6 +52,7 @@ public class ProfileController {
     public ResponseEntity<UserResponse> getProfileById(@Parameter(description = "Another user's id")
                                                        @PathVariable int id)
             throws UserNotFoundException, NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+
         AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UserResponse(userService.getById(id)));
     }
@@ -63,6 +65,7 @@ public class ProfileController {
     public ResponseEntity<UserResponse> updateProfile(@Parameter(description = "New information")
                                                       @RequestBody UserDTO userDTO)
             throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+
         User user = AuthenticationHelper.getAuthenticatedUser();
         userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         user = userService.update(user, userDTO);

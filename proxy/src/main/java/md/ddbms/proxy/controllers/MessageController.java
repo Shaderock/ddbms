@@ -101,6 +101,7 @@ public class MessageController {
             content = @Content(schema = @Schema(implementation = ChatListResponse.class)))
     public ResponseEntity<ChatListResponse> getChatList()
             throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new ChatListResponse(messageService.getChatList(user), user));
     }

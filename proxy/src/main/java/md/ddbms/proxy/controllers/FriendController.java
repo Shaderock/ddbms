@@ -73,6 +73,7 @@ public class FriendController {
                                                          @RequestParam(name = "userId") int friendId)
             throws UserNotFoundException, FriendDoesNotExistException,
             NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+
         User user = AuthenticationHelper.getAuthenticatedUser();
         userService.removeFriend(user, friendId);
         return ResponseEntity.ok(new Response<>("Friend has been removed from your friends list"));
@@ -86,6 +87,7 @@ public class FriendController {
     public ResponseEntity<UsersResponse> searchFriend(@Parameter(description = "firstname or lastname of a user")
                                                       @RequestParam String searchQuery)
             throws NoSuchRMIServiceException, ProxyRMIServiceNotFound {
+
         User user = AuthenticationHelper.getAuthenticatedUser();
         return ResponseEntity.ok(new UsersResponse(userService.searchFriend(user, searchQuery)));
     }
