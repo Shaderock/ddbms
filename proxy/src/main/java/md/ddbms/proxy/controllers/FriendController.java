@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
+import md.ddbms.proxy.caching.services.caching.interfaces.IProfilesCacheService;
 import md.ddbms.proxy.models.responses.ErrorResponse;
 import md.ddbms.proxy.models.responses.Response;
 import md.ddbms.proxy.models.responses.UsersResponse;
@@ -19,11 +20,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/friends", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 public class FriendController {
     private final IUserService userService;
+    private final IProfilesCacheService profilesCacheService;
 
     @Operation(security = @SecurityRequirement(name = "bearerAuth"),
             summary = "Get all user's friends")
@@ -34,7 +38,18 @@ public class FriendController {
             ProxyRMIServiceNotFound {
 
         User user = AuthenticationHelper.getAuthenticatedUser();
-        return ResponseEntity.ok(new UsersResponse(userService.getAllFriends(user)));
+        if (profilesCacheService.isUsersResponseStoredInCache(user.getId())) {
+            UsersResponse usersResponseFromCache =
+                    profilesCacheService.getUsersResponseFromCache(user.getId());
+            if (usersResponseFromCache == null) {
+                return ResponseEntity.ok(new UsersResponse());
+            }
+            return ResponseEntity.ok(usersResponseFromCache);
+        } else {
+            List<User> friends = userService.getAllFriends(user);
+            profilesCacheService.addUsersResponseToCache(new UsersResponse(friends), user.getId());
+            return ResponseEntity.ok(new UsersResponse(friends));
+        }
     }
 
     @Operation(security = @SecurityRequirement(name = "bearerAuth"),
@@ -54,6 +69,7 @@ public class FriendController {
             NoSuchRMIServiceException, ProxyRMIServiceNotFound {
 
         User user = AuthenticationHelper.getAuthenticatedUser();
+        profilesCacheService.deleteUsersResponseFromCache(user.getId());
         userService.addFriend(user, friendId);
         return ResponseEntity.ok(new Response<>("Friend has been added to your friends list"));
     }
@@ -75,6 +91,7 @@ public class FriendController {
             NoSuchRMIServiceException, ProxyRMIServiceNotFound {
 
         User user = AuthenticationHelper.getAuthenticatedUser();
+        profilesCacheService.deleteUsersResponseFromCache(user.getId());
         userService.removeFriend(user, friendId);
         return ResponseEntity.ok(new Response<>("Friend has been removed from your friends list"));
     }

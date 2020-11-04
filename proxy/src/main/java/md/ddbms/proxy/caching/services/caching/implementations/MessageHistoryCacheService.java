@@ -19,11 +19,7 @@ public class MessageHistoryCacheService implements IMessageHistoryCacheService {
     public MessageHistory getMessageHistoryFromCache(int userId1, int userId2) {
         Optional<CachedMessageHistory> cachedMessageHistory = messageHistoryCacheRepository
                 .findById(calcKey(userId1, userId2));
-        if (cachedMessageHistory.isPresent()) {
-            return cachedMessageHistory.get().getMessageHistory();
-        }
-
-        return null;
+        return cachedMessageHistory.map(CachedMessageHistory::getMessageHistory).orElse(null);
     }
 
     @Override
@@ -35,9 +31,7 @@ public class MessageHistoryCacheService implements IMessageHistoryCacheService {
     public void deleteMessageHistoryFromCache(int userId1, int userId2) {
         Optional<CachedMessageHistory> cachedMessageHistory = messageHistoryCacheRepository
                 .findById(calcKey(userId1, userId2));
-        if (cachedMessageHistory.isPresent()) {
-            messageHistoryCacheRepository.delete(cachedMessageHistory.get());
-        }
+        cachedMessageHistory.ifPresent(messageHistoryCacheRepository::delete);
     }
 
     @Override

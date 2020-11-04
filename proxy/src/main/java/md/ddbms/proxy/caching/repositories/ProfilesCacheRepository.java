@@ -1,10 +1,9 @@
 package md.ddbms.proxy.caching.repositories;
 
-import md.ddbms.rmi.models.User;
+import md.ddbms.proxy.caching.models.CachedProfiles;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserCacheRepository extends CrudRepository<User, String> {
-
+public interface ProfilesCacheRepository extends CrudRepository<CachedProfiles, String> {
 }
